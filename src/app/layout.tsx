@@ -20,8 +20,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-          <Navbar />
-          {children}
+          <main className="min-w-80 bg-black">
+            <Navbar />
+            {children}
+          </main>
         </Providers>
       </body>
     </html>
