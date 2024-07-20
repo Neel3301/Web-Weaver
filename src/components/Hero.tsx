@@ -6,7 +6,7 @@ import OutlineButton from "./ui/OutlineButton";
 
 const Hero = () => {
   return (
-    <div className="relative h-[36rem] lg:h-[38rem]">
+    <section className="relative h-[36rem] lg:h-[38rem]">
       <Image
         src={backgroundImg}
         alt="Background"
@@ -29,7 +29,7 @@ const Hero = () => {
           <OutlineButton text="Watch Demo" />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
