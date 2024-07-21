@@ -1,24 +1,14 @@
 "use client";
 
-import Gradient_Btn from "@/components/Gradient_Btn";
-import Outline_Btn from "@/components/Outline_Btn";
 import Home_Hero from "@/components/studio/Home/Home_Hero";
-import Home_Navbar from "@/components/studio/Home/Home_Navbar";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import Home_Template from "@/components/studio/Home/Home_Template";
 
 const Home = () => {
   return (
-    <>
-      <Home_Navbar />
+    <div className="m-auto flex max-w-[1440px] flex-col px-4 md:px-24 lg:px-36">
       <Home_Hero />
-    </>
+      <Home_Template />
+    </div>
   );
 };
 
