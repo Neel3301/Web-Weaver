@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import backgroundImg from "../../public/grid-background.png";
+import backgroundImg from "../../public/grid-background.webp";
 import GradientButton from "./ui/GradientButton";
 import OutlineButton from "./ui/OutlineButton";
 
@@ -11,6 +11,7 @@ const Hero = () => {
         src={backgroundImg}
         alt="Background"
         className="hidden h-full w-full object-contain sm:block"
+        priority
       />
 
       <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-6 md:gap-10 lg:w-[90%]">
