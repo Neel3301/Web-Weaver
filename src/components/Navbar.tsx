@@ -11,7 +11,7 @@ const Navbar = () => {
     <>
       <nav className="m-auto flex max-w-[1440px] flex-col">
         <div className="flex items-center justify-between p-4 md:px-24 lg:px-36">
-          <a className="text-lg font-bold md:text-2xl" href="/">
+          <a className="text-lg font-bold text-black-100 md:text-2xl" href="/">
             Glimmer
           </a>
 
@@ -19,14 +19,14 @@ const Navbar = () => {
             <div className="flex items-center md:hidden">
               <div className="flex h-8 w-8 items-center justify-center">
                 <CgClose
-                  className="text-xl md:hidden"
+                  className="text-xl text-black-100 md:hidden"
                   onClick={() => setShowMenu(false)}
                 />
               </div>
             </div>
           ) : (
             <HiMenuAlt3
-              className="text-xl md:hidden"
+              className="text-xl text-black-100 md:hidden"
               onClick={() => setShowMenu(true)}
             />
           )}
@@ -66,7 +66,7 @@ const Navbar = () => {
         </div>
       </nav>
       {showMenu && (
-        <div className="absolute z-10 flex w-full min-w-80 flex-col gap-2 border-b border-black-600 bg-black px-4 pb-4 md:hidden">
+        <div className="absolute z-10 flex w-full min-w-80 flex-col gap-2 border-b border-black-600 bg-black px-4 pb-4 text-black-100 md:hidden">
           <a href="/">Home</a>
           <a href="#features">Features</a>
           <a href="#templates">Templates</a>
