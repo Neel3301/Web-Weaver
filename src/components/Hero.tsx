@@ -14,7 +14,7 @@ const Hero = () => {
         priority
       />
 
-      <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-6 md:gap-10 lg:w-[90%]">
+      <div className="absolute inset-0 m-auto flex flex-col items-center justify-center gap-6 md:w-[95%] md:gap-10 lg:w-[90%]">
         <h1 className="text-center text-2xl font-extrabold text-black-100 sm:text-4xl md:text-5xl md:leading-semi-tight lg:text-6xl">
           Building websites made effortless. No coding skills required, just
           creativity.
