@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      rotate: {
+        "z-45": "45deg",
+      },
       colors: {
         black: {
           DEFAULT: "#000",

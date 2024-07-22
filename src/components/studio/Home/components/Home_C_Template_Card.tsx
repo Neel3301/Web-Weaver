@@ -16,7 +16,7 @@ const Home_C_Template_Card = ({
   description,
 }: Template_Card_Props) => {
   return (
-    <CardContainer className="inter-var">
+    <CardContainer className="inter-var lg:w-96">
       <CardBody className="group/card relative h-auto rounded-3xl border border-white/[0.2] bg-black-900 p-6 hover:shadow-2xl hover:shadow-emerald-500/[0.1]">
         <CardItem translateZ="100" className="mb-4">
           <div className="relative">
