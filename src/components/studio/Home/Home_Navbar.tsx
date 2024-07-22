@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 import Link from "next/link";
 
-const Navbar = () => {
+const Home_Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
-
   return (
     <>
       <nav className="m-auto flex max-w-[1440px] flex-col">
@@ -82,4 +81,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Home_Navbar;

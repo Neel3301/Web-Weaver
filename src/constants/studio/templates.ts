@@ -1,7 +1,7 @@
-import templateOne from "../public/template-1-example-long.png";
-import templateTwo from "../public/template-2-example-long.jpg";
-import templateThree from "../public/template-3-example-long.png";
-import templateFour from "../public/template-4-example-long.png";
+import templateOne from "@/../public/template-1-example-long.png";
+import templateTwo from "@/../public/template-2-example-long.jpg";
+import templateThree from "@/../public/template-3-example-long.png";
+import templateFour from "@/../public/template-4-example-long.png";
 
 export const templates = [
   {

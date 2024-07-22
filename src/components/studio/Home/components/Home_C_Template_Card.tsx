@@ -2,7 +2,7 @@
 
 import Image, { StaticImageData } from "next/image";
 import React from "react";
-import { CardBody, CardContainer, CardItem } from "../ui/ThreeDCard";
+import { CardBody, CardContainer, CardItem } from "@/components/ui/ThreeDCard";
 
 interface Template_Card_Props {
   img: StaticImageData;
@@ -10,9 +10,13 @@ interface Template_Card_Props {
   description: string;
 }
 
-const TemplateCard = ({ img, title, description }: Template_Card_Props) => {
+const Home_C_Template_Card = ({
+  img,
+  title,
+  description,
+}: Template_Card_Props) => {
   return (
-    <CardContainer className="inter-var">
+    <CardContainer className="inter-var lg:w-96">
       <CardBody className="group/card relative h-auto rounded-3xl border border-white/[0.2] bg-black-900 p-6 hover:shadow-2xl hover:shadow-emerald-500/[0.1]">
         <CardItem translateZ="100" className="mb-4">
           <div className="relative">
@@ -39,4 +43,4 @@ const TemplateCard = ({ img, title, description }: Template_Card_Props) => {
   );
 };
 
-export default TemplateCard;
+export default Home_C_Template_Card;
