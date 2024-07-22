@@ -17,7 +17,7 @@ const Home_C_Template_Card = ({
 }: Template_Card_Props) => {
   return (
     <CardContainer className="inter-var lg:w-96">
-      <CardBody className="group/card relative h-auto rounded-3xl border border-white/[0.2] bg-black-900 p-6 hover:shadow-2xl hover:shadow-emerald-500/[0.1]">
+      <CardBody className="group/card relative h-auto rounded-3xl border border-white/[0.2] bg-gray-900 p-6 hover:shadow-2xl hover:shadow-emerald-500/[0.1]">
         <CardItem translateZ="100" className="mb-4">
           <div className="relative">
             <Image
@@ -26,16 +26,12 @@ const Home_C_Template_Card = ({
               alt="thumbnail"
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black-900 opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900 opacity-100" />
         </CardItem>
-        <CardItem translateZ="50" className="text-xl font-bold text-black-100">
+        <CardItem translateZ="50" className="text-xl font-bold text-gray-100">
           {title}
         </CardItem>
-        <CardItem
-          as="p"
-          translateZ="60"
-          className="mt-2 text-sm text-black-500"
-        >
+        <CardItem as="p" translateZ="60" className="mt-2 text-sm text-gray-500">
           {description}
         </CardItem>
       </CardBody>
