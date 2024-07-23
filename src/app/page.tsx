@@ -2,6 +2,7 @@
 
 import Home_Client from "@/components/studio/Home/Home_Client";
 import Home_Features from "@/components/studio/Home/Home_Features";
+import Home_Footer from "@/components/studio/Home/Home_Footer";
 import Home_Hero from "@/components/studio/Home/Home_Hero";
 import Home_Template from "@/components/studio/Home/Home_Template";
 
@@ -12,6 +13,7 @@ const Home = () => {
       <Home_Template />
       <Home_Client />
       <Home_Features />
+      <Home_Footer />
     </div>
   );
 };
