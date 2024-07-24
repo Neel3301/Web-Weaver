@@ -22,8 +22,8 @@ const config = {
         "z-45": "45deg",
       },
       colors: {
-        black: {
-          DEFAULT: "#000",
+        gray: {
+          DEFAULT: "#808080",
           100: "#e6e6e6",
           200: "#cccccc",
           300: "#b3b3b3",
@@ -82,10 +82,17 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        scroll:
+          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
       lineHeight: {
         "semi-tight": "1.125",
