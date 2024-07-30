@@ -24,9 +24,7 @@ export default function Dashboard_Layout({
         <StarsBackground />
       </div>
       {/* childrens */}
-      <div
-        className={`${titillium_Web.className} relative flex w-screen max-w-[1560px] text-neutral-100`}
-      >
+      <div className={`relative flex w-screen max-w-[1560px] text-neutral-100`}>
         <div className="z-50">
           <Dashboard_C_Sidebar />
         </div>

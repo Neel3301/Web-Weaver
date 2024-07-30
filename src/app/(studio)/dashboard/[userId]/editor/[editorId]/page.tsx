@@ -1,8 +1,14 @@
-import Editor_C_Text_Toolbar from "@/components/studio/editor/components/Editor_C_Text_Toolbar";
+"use client";
+import Editor_C_Btn_Toolbox from "@/components/studio/editor/components/Editor_C_Btn_Toolbox";
+import Editor_C_Div_Toolbox from "@/components/studio/editor/components/Editor_C_Div_Toolbox";
+import Editor_C_Image_Toolbox from "@/components/studio/editor/components/Editor_C_Image_Toolbox";
+import Editor_C_Sidebar from "@/components/studio/editor/components/Editor_C_Sidebar";
+import Editor_C_Text_Toolbox from "@/components/studio/editor/components/Editor_C_Text_Toolbox";
 import Editor_C_Topbar from "@/components/studio/editor/components/Editor_C_Topbar";
 import Editor_S_Mockup from "@/components/studio/editor/Editor_S_Mockup";
 import ShootingStars from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
+import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 
 import { Titillium_Web } from "next/font/google";
 
@@ -16,6 +22,17 @@ export default function Editor({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [
+    Text_Toolbox_Is_Open,
+    Btn_Toolbox_Is_Open,
+    Image_Toolbox_Is_Open,
+    Div_Toolbox_Is_Open,
+  ] = use_Toolbox_Store((s) => [
+    s.Text_Toolbox_Is_Open,
+    s.Btn_Toolbox_Is_Open,
+    s.Image_Toolbox_Is_Open,
+    s.Div_Toolbox_Is_Open,
+  ]);
   return (
     <div className="flex h-screen w-screen justify-center bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-[#121212] via-black to-black">
       {/* Shooting star Bg  */}
@@ -32,7 +49,15 @@ export default function Editor({
         </div>
         <div className="z-50 flex">
           <div className="h-[calc(100vh-80px)] w-[250px]">
-            <Editor_C_Text_Toolbar />
+            {!Text_Toolbox_Is_Open &&
+              !Btn_Toolbox_Is_Open &&
+              !Image_Toolbox_Is_Open &&
+              !Div_Toolbox_Is_Open && <Editor_C_Sidebar />}
+
+            {Text_Toolbox_Is_Open && <Editor_C_Text_Toolbox />}
+            {Btn_Toolbox_Is_Open && <Editor_C_Btn_Toolbox />}
+            {Image_Toolbox_Is_Open && <Editor_C_Image_Toolbox />}
+            {Div_Toolbox_Is_Open && <Editor_C_Div_Toolbox />}
           </div>
 
           <div className="h-[calc(100vh-80px)] w-[calc(100vw-250px)] max-w-[calc(1560px-250px)]">
