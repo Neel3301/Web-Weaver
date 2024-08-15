@@ -1,3 +1,4 @@
+import { use_Mockup_Store } from "@/store/studio/Mockup_Store";
 import {
   BotMessageSquare,
   Flame,
@@ -8,6 +9,12 @@ import {
 import Link from "next/link";
 
 const Editor_C_Topbar = () => {
+  // using mockup store
+  const [Mockup, Set_MockUP] = use_Mockup_Store((s) => [
+    s.Mockup,
+    s.Set_MockUP,
+  ]);
+
   return (
     <div className="flex h-full w-full items-center justify-between border-b-[1px] border-neutral-700 p-6">
       {/* Title */}
@@ -16,7 +23,7 @@ const Editor_C_Topbar = () => {
           <Flame size={32} />
           {/* bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 */}
           <h1 className="bg-gradient-to-b from-neutral-50 to-neutral-200 bg-clip-text text-[32px] font-bold text-transparent">
-            Glimmer
+            Web Weaver
           </h1>
         </div>
         <div className="relative">
@@ -27,10 +34,25 @@ const Editor_C_Topbar = () => {
         </div>
       </Link>
       {/* Device Width */}
-      <div className="flex items-center justify-center gap-[24px]">
-        <Monitor />
-        <Tablet />
-        <Smartphone />
+      <div className={`flex items-center justify-center gap-[24px]`}>
+        <div
+          className={`cursor-pointer ${Mockup == "Desktop" && "text-blue-500"}`}
+          onClick={() => Set_MockUP("Desktop")}
+        >
+          <Monitor />
+        </div>
+        <div
+          className={`cursor-pointer ${Mockup == "Tablet" && "text-blue-500"}`}
+          onClick={() => Set_MockUP("Tablet")}
+        >
+          <Tablet />
+        </div>
+        <div
+          className={`cursor-pointer ${Mockup == "Mobile" && "text-blue-500"}`}
+          onClick={() => Set_MockUP("Mobile")}
+        >
+          <Smartphone />
+        </div>
       </div>
       {/* Hire Professional */}
       <div className="flex items-center justify-center gap-[24px]">

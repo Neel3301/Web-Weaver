@@ -1,9 +1,8 @@
 "use client";
-import Editor_C_Btn_Toolbox from "@/components/studio/editor/components/Editor_C_Btn_Toolbox";
-import Editor_C_Div_Toolbox from "@/components/studio/editor/components/Editor_C_Div_Toolbox";
-import Editor_C_Image_Toolbox from "@/components/studio/editor/components/Editor_C_Image_Toolbox";
+import Div_Toolbox from "@/components/utils/Div_Toolbox";
+import Image_Toolbox from "@/components/utils/Image_Toolbox";
 import Editor_C_Sidebar from "@/components/studio/editor/components/Editor_C_Sidebar";
-import Editor_C_Text_Toolbox from "@/components/studio/editor/components/Editor_C_Text_Toolbox";
+import Text_Toolbox from "@/components/utils/Text_Toolbox";
 import Editor_C_Topbar from "@/components/studio/editor/components/Editor_C_Topbar";
 import Editor_S_Mockup from "@/components/studio/editor/Editor_S_Mockup";
 import ShootingStars from "@/components/ui/shooting-stars";
@@ -11,6 +10,7 @@ import { StarsBackground } from "@/components/ui/stars-background";
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 
 import { Titillium_Web } from "next/font/google";
+import Btn_Toolbox from "@/components/utils/Btn_Toolbox";
 
 const titillium_Web = Titillium_Web({
   subsets: ["latin"],
@@ -54,10 +54,10 @@ export default function Editor({
               !Image_Toolbox_Is_Open &&
               !Div_Toolbox_Is_Open && <Editor_C_Sidebar />}
 
-            {Text_Toolbox_Is_Open && <Editor_C_Text_Toolbox />}
-            {Btn_Toolbox_Is_Open && <Editor_C_Btn_Toolbox />}
-            {Image_Toolbox_Is_Open && <Editor_C_Image_Toolbox />}
-            {Div_Toolbox_Is_Open && <Editor_C_Div_Toolbox />}
+            {Text_Toolbox_Is_Open && <Text_Toolbox />}
+            {Btn_Toolbox_Is_Open && <Btn_Toolbox />}
+            {Image_Toolbox_Is_Open && <Image_Toolbox />}
+            {Div_Toolbox_Is_Open && <Div_Toolbox />}
           </div>
 
           <div className="h-[calc(100vh-80px)] w-[calc(100vw-250px)] max-w-[calc(1560px-250px)]">

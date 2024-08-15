@@ -3,8 +3,10 @@
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 import { X } from "lucide-react";
 
-const Editor_C_Btn_Toolbox = () => {
-  const Btn_Toolbox_On_Close = use_Toolbox_Store((s) => s.Btn_Toolbox_On_Close);
+const Image_Toolbox = () => {
+  const Image_Toolbox_On_Close = use_Toolbox_Store(
+    (s) => s.Image_Toolbox_On_Close
+  );
   return (
     <div className="h-full w-full border-r-[1px] border-neutral-700">
       {/* text editor title  */}
@@ -12,9 +14,9 @@ const Editor_C_Btn_Toolbox = () => {
         className={`flex h-[60px] w-full items-center justify-between border-b-[1px] border-neutral-700 px-3`}
       >
         <h2 className={`text-[24px] font-bold text-neutral-200`}>
-          Button Editor
+          Image Editor
         </h2>
-        <div onClick={Btn_Toolbox_On_Close} className="cursor-pointer">
+        <div onClick={Image_Toolbox_On_Close} className="cursor-pointer">
           <X size={20} />
         </div>
       </div>
@@ -24,4 +26,4 @@ const Editor_C_Btn_Toolbox = () => {
   );
 };
 
-export default Editor_C_Btn_Toolbox;
+export default Image_Toolbox;

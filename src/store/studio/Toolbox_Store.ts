@@ -1,6 +1,11 @@
 import create from "zustand";
 
 interface Toolbox_Store {
+  //Dashboard Store
+
+  Dashboard_Sidebar_Is_Open: boolean;
+  Dashboard_Sidebar_Toggle: () => void;
+
   // text
   Text_Toolbox_Is_Open: boolean;
   Text_Toolbox_On_Open: () => void;
@@ -23,8 +28,15 @@ interface Toolbox_Store {
 }
 
 const use_Toolbox_Store = create<Toolbox_Store>((set) => ({
+  //   Dashboard
+  Dashboard_Sidebar_Is_Open: false,
+  Dashboard_Sidebar_Toggle: () =>
+    set((state) => ({
+      Dashboard_Sidebar_Is_Open: !state.Dashboard_Sidebar_Is_Open,
+    })),
+
   //   text
-  Text_Toolbox_Is_Open: true,
+  Text_Toolbox_Is_Open: false,
   Text_Toolbox_On_Open: () =>
     set((state) => ({
       Text_Toolbox_Is_Open: true,

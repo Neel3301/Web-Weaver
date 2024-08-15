@@ -34,11 +34,11 @@ const salsa = Salsa({ weight: ["400"], subsets: ["latin"] });
 const open_Sans = Open_Sans({ weight: ["400"], subsets: ["latin"] });
 
 export const Font_List = [
-  { Poppins: poppins },
-  { "Roboto Mono": roboto_Mono },
-  { "Titillium Web": titillium_Web },
-  { Volkhov: volkhov },
-  { Montserrat: montserrat },
-  { Salsa: salsa },
-  { "Open Sans": open_Sans },
+  ["Poppins", poppins.className],
+  ["Roboto Mono", roboto_Mono.className],
+  ["Titillium Web", titillium_Web.className],
+  ["Volkhov", volkhov.className],
+  ["Montserrat", montserrat.className],
+  ["Salsa", salsa.className],
+  ["Open Sans", open_Sans.className],
 ];
