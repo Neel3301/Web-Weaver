@@ -9,11 +9,7 @@ import { StarsBackground } from "@/components/ui/stars-background";
 
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 
-export default function Dashboard_Layout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Dashboard_Layout() {
   const Dashboard_Sidebar_Is_Open = use_Toolbox_Store(
     (s) => s.Dashboard_Sidebar_Is_Open
   );

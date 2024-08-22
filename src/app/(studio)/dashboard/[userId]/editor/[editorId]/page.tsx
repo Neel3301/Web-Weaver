@@ -20,11 +20,7 @@ const titillium_Web = Titillium_Web({
   weight: ["200", "300", "400", "600", "700", "900"],
 });
 
-export default function Editor({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Editor() {
   const [
     Text_Toolbox_Is_Open,
     Text_Toolbox_On_Open,
@@ -44,25 +40,6 @@ export default function Editor({
   const [Set_Selected_Id, Selected_Id, Add_Text_Component] = use_Text_Store(
     (s) => [s.Set_Selected_Id, s.Selected_Id, s.Add_Text_Component]
   );
-
-  // bi direction communication
-
-  // useEffect(() => {
-  //   const handleMessage = (event: MessageEvent) => {
-  //     if (event.data?.action === "openSidebar") {
-  //       Text_Toolbox_On_Open();
-  //     }
-  //     // Set_Selected_Id(event.data.id);
-
-  //     Set_Selected_Id(event.data.id);
-  //     Add_Text_Component(event.data.My_Component);
-  //   };
-  //   window.addEventListener("message", handleMessage);
-
-  //   return () => {
-  //     window.removeEventListener("message", handleMessage);
-  //   };
-  // }, []);
 
   return (
     <div className="flex h-screen w-screen justify-center bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-[#121212] via-black to-black">
