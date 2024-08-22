@@ -165,6 +165,7 @@ const Btn = ({
 
   return (
     <div
+      onClick={env == "development" ? handleClick : () => {}}
       className="flex h-fit w-fit items-center justify-center gap-[12px] transition duration-500"
       style={{
         backgroundColor: `${isHover ? My_Component?.Hover_Bg_Color : My_Component?.Bg_Color}`,
@@ -172,13 +173,13 @@ const Btn = ({
         borderColor: `${isHover ? My_Component?.Hover_Border_Color : My_Component?.Border_Color}`,
         padding: `${My_Component?.Pad_Y}px ${My_Component?.Pad_X}px`,
         color: `${isHover ? My_Component?.Hover_Text_Color : My_Component?.Text_Color}`,
+        borderRadius: `${My_Component?.Border_Radius_Tl}px ${My_Component?.Border_Radius_Tr}px ${My_Component?.Border_Radius_Br}px ${My_Component?.Border_Radius_Bl}px`,
       }}
     >
       {My_Component?.Icon != "" && <IconComponent size={24} />}
       {My_Component?.Content != "" && (
         <Element
           id={cId}
-          onClick={env == "development" ? handleClick : () => {}}
           onBlur={env == "development" ? handleInput : () => {}}
           contentEditable={env == "development" ? true : false}
           spellCheck={false}
@@ -192,8 +193,6 @@ const Btn = ({
 
             textDecoration: `${My_Component?.Text_Underline == true ? `underline` : `none`}`,
             fontStyle: `${My_Component?.Text_Italic == true ? `italic` : `normal`}`,
-
-            borderRadius: `${My_Component?.Border_Radius_Tl}px ${My_Component?.Border_Radius_Tr}px ${My_Component?.Border_Radius_Br}px ${My_Component?.Border_Radius_Bl}px`,
 
             lineHeight: `${My_Component?.Line_Height === 0 ? `normal` : My_Component?.Line_Height}px`,
             letterSpacing: `${My_Component?.Letter_Spacing}px`,
