@@ -3,6 +3,7 @@ import Image from "next/image";
 import backgroundImg from "@/../public/grid-background.png";
 import Home_C_Gradient_Btn from "./components/Home_C_Gradient_Btn";
 import Home_C_Outline_Btn from "./components/Home_C_Outline_Btn";
+import Link from "next/link";
 
 const Home_Hero = () => {
   return (
@@ -28,8 +29,12 @@ const Home_Hero = () => {
           clicks.
         </p>
         <div className="flex gap-2">
-          <Home_C_Gradient_Btn text="Get Started" />
-          <Home_C_Outline_Btn text="Watch Demo" />
+          <Link href={"/dashboard/1"}>
+            <Home_C_Gradient_Btn text="Get Started" />
+          </Link>
+          <Link href={"/dashboard/1"}>
+            <Home_C_Outline_Btn text="Watch Demo" />
+          </Link>
         </div>
       </div>
     </section>

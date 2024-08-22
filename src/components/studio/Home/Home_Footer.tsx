@@ -3,7 +3,7 @@ import React from "react";
 
 const Home_Footer = () => {
   return (
-    <footer className="flex flex-col gap-8 py-16">
+    <footer className="flex flex-col gap-8 py-16 pb-4">
       <div className="flex flex-col items-start justify-between sm:flex-row">
         <div className="text-lg font-bold text-gray-100 md:text-2xl">
           <Link href="/">Glimmer</Link>

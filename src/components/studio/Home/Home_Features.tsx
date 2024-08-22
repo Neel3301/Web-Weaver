@@ -3,6 +3,7 @@ import React from "react";
 import backgroundImg from "@/../public/grid-background.png";
 import Home_C_Gradient_Btn from "./components/Home_C_Gradient_Btn";
 import Home_C_Outline_Btn from "./components/Home_C_Outline_Btn";
+import Link from "next/link";
 
 const Home_Features = () => {
   return (
@@ -21,12 +22,16 @@ const Home_Features = () => {
           Features like responsive design, no coding required and more
         </h2>
         <p className="text-center text-sm font-semibold text-gray-500 sm:text-left md:text-base lg:text-lg">
-          Whether you're a technical expert or a non-technical user, Glimmer
-          helps you create stunning websites effortlessly.
+          {`Whether you're a technical expert or a non-technical user, Glimmer
+          helps you create stunning websites effortlessly.`}
         </p>
         <div className="flex items-center justify-center gap-2 sm:justify-start">
-          <Home_C_Gradient_Btn text="Get Started" />
-          <Home_C_Outline_Btn text="Watch Demo" />
+          <Link href={"/dashboard/1"}>
+            <Home_C_Gradient_Btn text="Get Started" />
+          </Link>
+          <Link href={"/dashboard/1"}>
+            <Home_C_Outline_Btn text="Watch Demo" />
+          </Link>
         </div>
       </div>
     </section>

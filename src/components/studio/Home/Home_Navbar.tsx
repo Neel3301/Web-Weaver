@@ -9,13 +9,13 @@ const Home_Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   return (
     <>
-      <nav className="m-auto flex w-screen max-w-[1440px] flex-col">
+      <nav className="m-auto flex w-screen max-w-[1440px] flex-col pt-[12px]">
         <div className="flex items-center justify-between p-4 md:px-24 lg:px-36">
           <Link
             className="text-lg font-bold text-gray-100 md:text-2xl"
             href="/"
           >
-            Glimmer
+            Web Weaver
           </Link>
 
           {showMenu ? (

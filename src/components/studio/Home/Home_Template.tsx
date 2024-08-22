@@ -25,7 +25,7 @@ const Home_Template = () => {
 
         <div className="m-auto grid gap-4 sm:grid-cols-2 lg:w-[48rem]">
           {templates.map(({ _id, img, title, description }) => (
-            <Link href="#" key={_id}>
+            <Link href="/dashboard/1" key={_id}>
               <Home_C_Template_Card
                 img={img}
                 title={title}
@@ -37,7 +37,7 @@ const Home_Template = () => {
 
         <div className="flex flex-col items-center justify-center gap-2 pt-8 sm:flex-row">
           <span className="text-gray-100">Check out all templates</span>
-          <Link href="#templates">
+          <Link href="/dashboard/1">
             <div className="flex items-center justify-center gap-2 text-center text-blue-500 underline underline-offset-2">
               <HiOutlineArrowRight />
               View Templates

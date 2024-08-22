@@ -11,7 +11,7 @@ const T1_Landing = () => {
       <div className="flex h-full w-[50%] flex-col items-center justify-center">
         <div className="w-[320px]">
           <Text
-            cId="My name is Jacob Jones..."
+            cId="t1-landing-text"
             tag={"h1"}
             fontSize={58}
             textColor="#000000"
@@ -23,14 +23,14 @@ const T1_Landing = () => {
         </div>
 
         <div className="mt-[12px]">
-          <Text cId="Product Designer based in London" tag={"h3"}>
+          <Text cId="t1-landing-sub-text" tag={"h3"}>
             Product Designer based in London
           </Text>
         </div>
 
         <div className="mt-[24px] w-[320px]">
           <Btn
-            cId="Let’s talk with me"
+            cId="t1-landing-btn"
             tag={"span"}
             textColor="#ffffff"
             padX={24}
@@ -45,7 +45,7 @@ const T1_Landing = () => {
           <div className="flex items-center justify-start gap-[8px]">
             <Icon cId="t1-icon1" icon="PhoneIcon" iconColor="#000000" />
             <Text
-              cId="+77 022 444 05 05"
+              cId="t1-contact-num"
               tag={"p"}
               textColor="#000000"
               fontSize={18}
@@ -55,12 +55,7 @@ const T1_Landing = () => {
           </div>
           <div className="flex items-center justify-start gap-[8px]">
             <Icon cId="t1-icon-2" icon="MailIcon" iconColor="#000000" />
-            <Text
-              cId="+77 022 444 05 05"
-              tag={"p"}
-              textColor="#000000"
-              fontSize={18}
-            >
+            <Text cId="t1-mail" tag={"p"} textColor="#000000" fontSize={18}>
               jacob360@gmail.com
             </Text>
           </div>
@@ -70,7 +65,7 @@ const T1_Landing = () => {
       {/* right */}
       <div className="flex h-full w-[50%] flex-col items-center justify-center">
         <Image
-          cid="t1-landing"
+          cid="t1-landing-img"
           img="/T1/landing.png"
           height={500}
           width={400}
