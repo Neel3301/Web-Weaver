@@ -1,6 +1,9 @@
 "use client";
+import T1_Sidebar from "@/app/web/template_1/component/T1_Sidebar";
+import Template_1 from "@/app/web/template_1/page";
 import Btn from "@/components/utils/Btn";
 import Icon from "@/components/utils/Icon";
+import Image from "@/components/utils/Image";
 import Text from "@/components/utils/Text";
 import { use_Mockup_Store } from "@/store/studio/Mockup_Store";
 
@@ -17,7 +20,7 @@ const Editor_S_Mockup = () => {
         {/* iframe  */}
         {/* <iframe src="http://localhost:3000/" className="h-full w-full"></iframe> */}
 
-        <Text cId="text1" tag={"h1"}>
+        {/* <Text cId="text1" tag={"h1"}>
           Text-1
         </Text>
         <br />
@@ -25,7 +28,10 @@ const Editor_S_Mockup = () => {
           My Btn
         </Btn>
         <br />
-        <Icon cId="icon1" icon="X" />
+        <Icon cId="icon1" icon="X" /> */}
+
+        <Template_1 />
+        {/* <Image cid="apple" img="/t1.png" height={200} width={400} /> */}
       </div>
     </div>
   );

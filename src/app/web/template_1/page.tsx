@@ -1,21 +1,14 @@
-import Btn from "@/components/utils/Btn";
-import Text from "@/components/utils/Text";
+import T1_Landing from "./component/T1_Landing";
+import T1_Sidebar from "./component/T1_Sidebar";
 
 const Template_1 = () => {
   return (
-    <div className="flex h-screen w-screen flex-wrap items-center justify-center gap-4 bg-white">
-      {/* utils component trial  */}
-      <Text cId="text1" tag={"h1"}>
-        Text-1
-      </Text>
-      <br />
-      <Text cId="text2" tag={"h1"}>
-        Text-2
-      </Text>
-      <br />
-      <Btn cId="btn" tag={"h1"}>
-        My Btn
-      </Btn>
+    <div className="flex h-screen w-full bg-white">
+      <T1_Sidebar />
+
+      <div className="w-[calc(100vw-200px)]">
+        <T1_Landing />
+      </div>
     </div>
   );
 };

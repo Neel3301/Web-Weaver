@@ -1,4 +1,7 @@
 const Icon_List = [
+  "Instagram",
+  "Linkedin",
+  "Twitter",
   "AArrowDownIcon",
   "AArrowUpIcon",
   "ALargeSmallIcon",
