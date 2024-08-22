@@ -77,11 +77,13 @@ const Text_Toolbox = () => {
   };
   // size
   const Handle_Size = (value: any) => {
-    Set_Font_Size(Selected_Id!, value["0"]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Font_Size(Selected_Id!, value);
   };
   // weight
   const Handle_Weight = (value: any) => {
-    Set_Font_Weight(Selected_Id!, value[0]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Font_Weight(Selected_Id!, value);
   };
   // color
   const Handle_Color = (e: any) => {
@@ -101,11 +103,13 @@ const Text_Toolbox = () => {
   };
   // height
   const Handle_Line_Height = (value: any) => {
-    Set_Line_Height(Selected_Id!, value[0]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Line_Height(Selected_Id!, value);
   };
   // spacing
   const Handle_Letter_Spacing = (value: any) => {
-    Set_Letter_Spacing(Selected_Id!, value[0]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Letter_Spacing(Selected_Id!, value);
   };
   // link
   const Handle_Link = (e: any) => {
@@ -152,14 +156,19 @@ const Text_Toolbox = () => {
           </div>
         </Toolbox>
         {/* size */}
-        <Toolbox heading="Select Font Size">
+        <Toolbox
+          heading="Select Font Size"
+          handleChange={(e: any) => Handle_Size(e.target.value)}
+          value={My_Component?.Font_Size}
+        >
           <div className="py-[12px]">
             <Slider
               defaultValue={[My_Component?.Font_Size || 0]}
               max={100}
               step={1}
               onValueChange={Handle_Size}
-              className="w-full bg-white"
+              value={[My_Component?.Font_Size || 0]}
+              className="w-full cursor-pointer bg-white"
             />
           </div>
         </Toolbox>
@@ -241,36 +250,51 @@ const Text_Toolbox = () => {
           </div>
         </Toolbox>
         {/* weight */}
-        <Toolbox heading="Select Font Weight">
+        <Toolbox
+          heading="Select Font Weight"
+          handleChange={(e: any) => Handle_Weight(e.target.value)}
+          value={My_Component?.Font_Weight}
+        >
           <div className="py-[12px]">
             <Slider
               defaultValue={[My_Component?.Font_Weight || 0]}
               max={1000}
               step={1}
+              value={[My_Component?.Font_Weight || 0]}
               className="w-full bg-white"
               onValueChange={Handle_Weight}
             />
           </div>
         </Toolbox>
         {/* Lineheight */}
-        <Toolbox heading="Select Line Height">
+        <Toolbox
+          heading="Select Line Height"
+          handleChange={(e: any) => Handle_Line_Height(e.target.value)}
+          value={My_Component?.Line_Height}
+        >
           <div className="py-[12px]">
             <Slider
               defaultValue={[My_Component?.Line_Height || 0]}
               max={100}
               step={1}
+              value={[My_Component?.Line_Height || 0]}
               className="w-full bg-white"
               onValueChange={Handle_Line_Height}
             />
           </div>
         </Toolbox>
         {/* letter spacing */}
-        <Toolbox heading="Select Letter Spacing">
+        <Toolbox
+          heading="Select Letter Spacing"
+          handleChange={(e: any) => Handle_Letter_Spacing(e.target.value)}
+          value={My_Component?.Letter_Spacing}
+        >
           <div className="py-[12px]">
             <Slider
               defaultValue={[My_Component?.Letter_Spacing || 0]}
               max={100}
               step={1}
+              value={[My_Component?.Letter_Spacing || 0]}
               className="w-full bg-white"
               onValueChange={Handle_Letter_Spacing}
             />
@@ -285,17 +309,34 @@ const Text_Toolbox = () => {
 export const Toolbox = ({
   heading,
   children,
+  handleChange,
+  value,
 }: {
   heading: string;
   children: React.ReactNode;
+  handleChange?: (e: any) => void;
+  value?: string | number;
 }) => {
   return (
     <div
       className={`flex flex-col gap-[8px] border-b-[1px] border-neutral-700 py-[12px]`}
     >
-      <h2 className={`text-[16px] font-semibold text-neutral-300`}>
-        {heading}
-      </h2>
+      <div className="flex items-center justify-between">
+        <h2 className={`text-[16px] font-semibold text-neutral-300`}>
+          {heading}
+        </h2>
+
+        {handleChange != undefined && (
+          <div className="flex h-[24px] w-[60px] items-center overflow-hidden rounded-[8px] border-[2px] border-neutral-700 bg-black">
+            <Input
+              className="border-none text-center"
+              type="number"
+              value={value}
+              onChange={handleChange}
+            />
+          </div>
+        )}
+      </div>
       <div>{children}</div>
     </div>
   );

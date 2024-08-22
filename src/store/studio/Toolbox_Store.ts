@@ -16,6 +16,11 @@ interface Toolbox_Store {
   Btn_Toolbox_On_Open: () => void;
   Btn_Toolbox_On_Close: () => void;
 
+  // icon
+  Icon_Toolbox_Is_Open: boolean;
+  Icon_Toolbox_On_Open: () => void;
+  Icon_Toolbox_On_Close: () => void;
+
   //   image
   Image_Toolbox_Is_Open: boolean;
   Image_Toolbox_On_Open: () => void;
@@ -42,6 +47,7 @@ const use_Toolbox_Store = create<Toolbox_Store>((set) => ({
       Text_Toolbox_Is_Open: true,
       // close other
       Btn_Toolbox_Is_Open: false,
+      Icon_Toolbox_Is_Open: false,
       Image_Toolbox_Is_Open: false,
       Div_Toolbox_Is_Open: false,
     })),
@@ -55,10 +61,25 @@ const use_Toolbox_Store = create<Toolbox_Store>((set) => ({
       Btn_Toolbox_Is_Open: true,
       // close other
       Text_Toolbox_Is_Open: false,
+      Icon_Toolbox_Is_Open: false,
       Image_Toolbox_Is_Open: false,
       Div_Toolbox_Is_Open: false,
     })),
   Btn_Toolbox_On_Close: () => set((state) => ({ Btn_Toolbox_Is_Open: false })),
+
+  //   icon
+  Icon_Toolbox_Is_Open: false,
+  Icon_Toolbox_On_Open: () =>
+    set((state) => ({
+      Icon_Toolbox_Is_Open: true,
+      // close other
+      Text_Toolbox_Is_Open: false,
+      Btn_Toolbox_Is_Open: false,
+      Image_Toolbox_Is_Open: false,
+      Div_Toolbox_Is_Open: false,
+    })),
+  Icon_Toolbox_On_Close: () =>
+    set((state) => ({ Icon_Toolbox_Is_Open: false })),
 
   //   image
   Image_Toolbox_Is_Open: false,
@@ -68,6 +89,7 @@ const use_Toolbox_Store = create<Toolbox_Store>((set) => ({
       // close other
       Text_Toolbox_Is_Open: false,
       Btn_Toolbox_Is_Open: false,
+      Icon_Toolbox_Is_Open: false,
       Div_Toolbox_Is_Open: false,
     })),
   Image_Toolbox_On_Close: () =>
@@ -80,6 +102,7 @@ const use_Toolbox_Store = create<Toolbox_Store>((set) => ({
       Div_Toolbox_Is_Open: true,
       // close other
       Text_Toolbox_Is_Open: false,
+      Icon_Toolbox_Is_Open: false,
       Image_Toolbox_Is_Open: false,
       Btn_Toolbox_Is_Open: false,
     })),

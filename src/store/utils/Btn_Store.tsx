@@ -22,6 +22,13 @@ interface Btn_Component {
   Hover_Bg_Color?: string;
   Hover_Text_Color?: string;
 
+  Border_Radius_Tl?: number;
+  Border_Radius_Tr?: number;
+  Border_Radius_Bl?: number;
+  Border_Radius_Br?: number;
+
+  Icon?: string;
+
   Line_Height?: number;
   Letter_Spacing?: number;
 
@@ -52,6 +59,13 @@ interface Btn_Store {
   Set_Hover_Bg_Color: (Id: string, Hover_Bg_Color: string) => void;
   Set_Hover_Border_Color: (Id: string, Hover_Border_Color: string) => void;
   Set_Hover_Text_Color: (Id: string, Hover_Text_Color: string) => void;
+
+  Set_Border_Radius_Tl: (Id: string, Border_Radius_Tl: number) => void;
+  Set_Border_Radius_Tr: (Id: string, Border_Radius_Tr: number) => void;
+  Set_Border_Radius_Bl: (Id: string, Border_Radius_Bl: number) => void;
+  Set_Border_Radius_Br: (Id: string, Border_Radius_Br: number) => void;
+
+  Set_Icon: (Id: string, icon: string) => void;
 
   Set_Line_Height: (Id: string, Line_Height: number) => void;
   Set_Letter_Spacing: (Id: string, Letter_Spacing: number) => void;
@@ -184,10 +198,47 @@ export const use_Btn_Store = create<Btn_Store>((set) => ({
     }));
   },
 
+  Set_Border_Radius_Tl: (Id, Border_Radius_Tl) => {
+    set((state) => ({
+      Btn_Components: state.Btn_Components.map((component) =>
+        component.Id === Id ? { ...component, Border_Radius_Tl } : component
+      ),
+    }));
+  },
+
+  Set_Border_Radius_Tr: (Id, Border_Radius_Tr) => {
+    set((state) => ({
+      Btn_Components: state.Btn_Components.map((component) =>
+        component.Id === Id ? { ...component, Border_Radius_Tr } : component
+      ),
+    }));
+  },
+  Set_Border_Radius_Bl: (Id, Border_Radius_Bl) => {
+    set((state) => ({
+      Btn_Components: state.Btn_Components.map((component) =>
+        component.Id === Id ? { ...component, Border_Radius_Bl } : component
+      ),
+    }));
+  },
+  Set_Border_Radius_Br: (Id, Border_Radius_Br) => {
+    set((state) => ({
+      Btn_Components: state.Btn_Components.map((component) =>
+        component.Id === Id ? { ...component, Border_Radius_Br } : component
+      ),
+    }));
+  },
   Set_Hover_Text_Color: (Id, Hover_Text_Color) => {
     set((state) => ({
       Btn_Components: state.Btn_Components.map((component) =>
         component.Id === Id ? { ...component, Hover_Text_Color } : component
+      ),
+    }));
+  },
+
+  Set_Icon: (Id, Icon) => {
+    set((state) => ({
+      Btn_Components: state.Btn_Components.map((component) =>
+        component.Id === Id ? { ...component, Icon } : component
       ),
     }));
   },

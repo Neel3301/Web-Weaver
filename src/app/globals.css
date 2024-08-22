@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Removing Scrollbar Decoration */
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;
 }
+
 /* ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
@@ -15,3 +17,14 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #00b7ff88;
 } */
+
+/* Removing Input Decoration */
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -11,6 +11,9 @@ import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 
 import { Titillium_Web } from "next/font/google";
 import Btn_Toolbox from "@/components/utils/Btn_Toolbox";
+import { useEffect, useState } from "react";
+import { use_Text_Store } from "@/store/utils/Text_Store";
+import Icon_Toolbox from "@/components/utils/Icon_Toolbox";
 
 const titillium_Web = Titillium_Web({
   subsets: ["latin"],
@@ -24,15 +27,43 @@ export default function Editor({
 }>) {
   const [
     Text_Toolbox_Is_Open,
+    Text_Toolbox_On_Open,
     Btn_Toolbox_Is_Open,
+    Icon_Toolbox_Is_Open,
     Image_Toolbox_Is_Open,
     Div_Toolbox_Is_Open,
   ] = use_Toolbox_Store((s) => [
     s.Text_Toolbox_Is_Open,
+    s.Text_Toolbox_On_Open,
     s.Btn_Toolbox_Is_Open,
+    s.Icon_Toolbox_Is_Open,
     s.Image_Toolbox_Is_Open,
     s.Div_Toolbox_Is_Open,
   ]);
+
+  const [Set_Selected_Id, Selected_Id, Add_Text_Component] = use_Text_Store(
+    (s) => [s.Set_Selected_Id, s.Selected_Id, s.Add_Text_Component]
+  );
+
+  // bi direction communication
+
+  // useEffect(() => {
+  //   const handleMessage = (event: MessageEvent) => {
+  //     if (event.data?.action === "openSidebar") {
+  //       Text_Toolbox_On_Open();
+  //     }
+  //     // Set_Selected_Id(event.data.id);
+
+  //     Set_Selected_Id(event.data.id);
+  //     Add_Text_Component(event.data.My_Component);
+  //   };
+  //   window.addEventListener("message", handleMessage);
+
+  //   return () => {
+  //     window.removeEventListener("message", handleMessage);
+  //   };
+  // }, []);
+
   return (
     <div className="flex h-screen w-screen justify-center bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-[#121212] via-black to-black">
       {/* Shooting star Bg  */}
@@ -52,10 +83,12 @@ export default function Editor({
             {!Text_Toolbox_Is_Open &&
               !Btn_Toolbox_Is_Open &&
               !Image_Toolbox_Is_Open &&
-              !Div_Toolbox_Is_Open && <Editor_C_Sidebar />}
+              !Div_Toolbox_Is_Open &&
+              !Icon_Toolbox_Is_Open && <Editor_C_Sidebar />}
 
             {Text_Toolbox_Is_Open && <Text_Toolbox />}
             {Btn_Toolbox_Is_Open && <Btn_Toolbox />}
+            {Icon_Toolbox_Is_Open && <Icon_Toolbox />}
             {Image_Toolbox_Is_Open && <Image_Toolbox />}
             {Div_Toolbox_Is_Open && <Div_Toolbox />}
           </div>

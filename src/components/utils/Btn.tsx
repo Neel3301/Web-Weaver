@@ -1,8 +1,11 @@
+"use client";
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 import { use_Btn_Store } from "@/store/utils/Btn_Store";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+import * as LucidIcons from "lucide-react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,7 +16,6 @@ interface Btn_Props {
   cId: string;
   children?: string;
   tag: keyof JSX.IntrinsicElements | React.ComponentType<any>;
-  env?: "development" | "production";
 
   fontStyle?: string;
   fontSize?: number;
@@ -33,6 +35,13 @@ interface Btn_Props {
   hoverBgColor?: string;
   hoverTextColor?: string;
 
+  borderRadiusTl?: number;
+  borderRadiusTr?: number;
+  borderRadiusBl?: number;
+  borderRadiusBr?: number;
+
+  icon?: string;
+
   lineHeight?: number;
   letterSpacing?: number;
 
@@ -43,7 +52,6 @@ const Btn = ({
   cId,
   children = "text",
   tag = "span",
-  env = "development",
 
   fontStyle = poppins.className,
   fontSize = 18,
@@ -53,15 +61,22 @@ const Btn = ({
   textUnderline = false,
   textItalic = false,
 
-  bgColor = "000",
+  bgColor = "#000000",
   borderWidth = 2,
   borderColor = "#fff",
   padX = 12,
   padY = 4,
 
-  hoverBorderColor = "#000",
-  hoverBgColor = "#fff",
-  hoverTextColor = "#000",
+  hoverBorderColor = "#000000",
+  hoverBgColor = "#ffffff",
+  hoverTextColor = "#000000",
+
+  borderRadiusTl = 0,
+  borderRadiusTr = 0,
+  borderRadiusBl = 0,
+  borderRadiusBr = 0,
+
+  icon = "",
 
   lineHeight,
   letterSpacing,
@@ -103,6 +118,11 @@ const Btn = ({
       Hover_Border_Color: hoverBorderColor,
       Hover_Bg_Color: hoverBgColor,
       Hover_Text_Color: hoverTextColor,
+      Border_Radius_Tl: borderRadiusTl,
+      Border_Radius_Tr: borderRadiusTr,
+      Border_Radius_Bl: borderRadiusBl,
+      Border_Radius_Br: borderRadiusBr,
+      Icon: icon,
       Line_Height: lineHeight,
       Letter_Spacing: letterSpacing,
       Link: link,
@@ -125,36 +145,64 @@ const Btn = ({
     Set_Content(cId, e.currentTarget.textContent || "");
   };
 
+  // setting environment
+  let env = "development";
+  const path = usePathname();
+  if (path.startsWith("/web/")) {
+    env = "production";
+  }
+
   const Element = env == "development" ? "span" : Link;
 
+  const [isHover, setIsHover] = useState(false);
+
+  const IconComponent = (LucidIcons as any as any)[
+    My_Component?.Icon || ""
+  ] as React.ComponentType<{ size?: number }>;
+
+  // console.log(IconComponent);
+  // console.log(My_Component?.Icon);
+
   return (
-    <Element
-      id={cId}
-      onClick={handleClick}
-      onBlur={env == "development" ? handleInput : () => {}}
-      contentEditable={true}
-      spellCheck={false}
-      className={`${My_Component?.Font_Style} h-fit w-fit ${env != "development" ? "cursor-pointer" : "cursor-text"} h-border-[${My_Component?.Hover_Border_Color}] h-bg-[${My_Component?.Hover_Bg_Color}] h-text-[${My_Component?.Hover_Text_Color}]`}
-      href={link || ""}
+    <div
+      className="flex h-fit w-fit items-center justify-center gap-[12px] transition duration-500"
       style={{
-        fontSize: `${My_Component?.Font_Size}px`,
-        fontWeight: `${My_Component?.Font_Weight}`,
-
-        color: `${My_Component?.Text_Color}`,
-        textDecoration: `${My_Component?.Text_Underline == true ? `underline` : `none`}`,
-        fontStyle: `${My_Component?.Text_Italic == true ? `italic` : `normal`}`,
-
-        backgroundColor: `${My_Component?.Bg_Color}`,
+        backgroundColor: `${isHover ? My_Component?.Hover_Bg_Color : My_Component?.Bg_Color}`,
         borderWidth: `${My_Component?.Border_Width}px`,
-        borderColor: `${My_Component?.Border_Color}`,
+        borderColor: `${isHover ? My_Component?.Hover_Border_Color : My_Component?.Border_Color}`,
         padding: `${My_Component?.Pad_Y}px ${My_Component?.Pad_X}px`,
-
-        lineHeight: `${My_Component?.Line_Height === 0 ? `normal` : My_Component?.Line_Height}px`,
-        letterSpacing: `${My_Component?.Letter_Spacing}px`,
+        color: `${isHover ? My_Component?.Hover_Text_Color : My_Component?.Text_Color}`,
       }}
     >
-      {children}
-    </Element>
+      {My_Component?.Icon != "" && <IconComponent size={24} />}
+      {My_Component?.Content != "" && (
+        <Element
+          id={cId}
+          onClick={env == "development" ? handleClick : () => {}}
+          onBlur={env == "development" ? handleInput : () => {}}
+          contentEditable={env == "development" ? true : false}
+          spellCheck={false}
+          onMouseOver={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
+          className={`${My_Component?.Font_Style} flex h-fit w-fit items-center justify-center gap-[12px] ${env == "development" ? "cursor-text" : "cursor-pointer"} hover:border-[${My_Component?.Hover_Border_Color}] hover:bg-[${My_Component?.Hover_Bg_Color}] hover:text-[${My_Component?.Hover_Text_Color}]`}
+          href={link || ""}
+          style={{
+            fontSize: `${My_Component?.Font_Size}px`,
+            fontWeight: `${My_Component?.Font_Weight}`,
+
+            textDecoration: `${My_Component?.Text_Underline == true ? `underline` : `none`}`,
+            fontStyle: `${My_Component?.Text_Italic == true ? `italic` : `normal`}`,
+
+            borderRadius: `${My_Component?.Border_Radius_Tl}px ${My_Component?.Border_Radius_Tr}px ${My_Component?.Border_Radius_Br}px ${My_Component?.Border_Radius_Bl}px`,
+
+            lineHeight: `${My_Component?.Line_Height === 0 ? `normal` : My_Component?.Line_Height}px`,
+            letterSpacing: `${My_Component?.Letter_Spacing}px`,
+          }}
+        >
+          {children != "" && children}
+        </Element>
+      )}
+    </div>
   );
 };
 

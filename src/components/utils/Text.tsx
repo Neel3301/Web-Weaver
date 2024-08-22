@@ -1,7 +1,9 @@
+"use client";
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 import { use_Text_Store } from "@/store/utils/Text_Store";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Children, useState } from "react";
 
 const poppins = Poppins({
@@ -13,7 +15,6 @@ interface Text_Props {
   cId: string;
   children?: string;
   tag: keyof JSX.IntrinsicElements | React.ComponentType<any>;
-  env?: "development" | "production";
 
   fontStyle?: string;
   fontSize?: number;
@@ -34,7 +35,6 @@ const Text = ({
   cId,
   children = "text",
   tag = "span",
-  env = "development",
 
   fontStyle = poppins.className,
   fontSize = 18,
@@ -48,21 +48,27 @@ const Text = ({
   lineHeight,
   letterSpacing,
 
-  link,
+  link = "",
 }: Text_Props) => {
   // text stote
-  const [Text_Component, Add_Text_Component, Set_Selected_Id, Set_Content] =
-    use_Text_Store((s) => [
-      s.Text_Components,
-      s.Add_Text_Component,
-      s.Set_Selected_Id,
-      s.Set_Content,
-    ]);
+  const [
+    Text_Component,
+    Add_Text_Component,
+    Set_Selected_Id,
+    Set_Content,
+    Selected_Id,
+  ] = use_Text_Store((s) => [
+    s.Text_Components,
+    s.Add_Text_Component,
+    s.Set_Selected_Id,
+    s.Set_Content,
+    s.Selected_Id,
+  ]);
 
   // text toolbox
-  const [Text_Toolbox_On_Open] = use_Toolbox_Store((s) => [
-    s.Text_Toolbox_On_Open,
-  ]);
+  const [Text_Toolbox_On_Open, Text_Toolbox_Is_Open] = use_Toolbox_Store(
+    (s) => [s.Text_Toolbox_On_Open, s.Text_Toolbox_Is_Open]
+  );
 
   // adding element
   const Existing_Component = Text_Component.find((x) => x.Id === cId);
@@ -91,6 +97,11 @@ const Text = ({
 
   // handle click
   const handleClick = () => {
+    // window.parent.postMessage(
+    //   { action: "openSidebar", id: cId, My_Component: My_Component },
+    //   "*"
+    // );
+
     Text_Toolbox_On_Open();
     Set_Selected_Id(cId);
   };
@@ -99,6 +110,13 @@ const Text = ({
   const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
     Set_Content(cId, e.currentTarget.textContent || "");
   };
+
+  // setting environment
+  let env = "development";
+  const path = usePathname();
+  if (path.startsWith("/web/")) {
+    env = "production";
+  }
 
   // selecting Element
   const Element =
@@ -111,12 +129,12 @@ const Text = ({
   return (
     <Element
       id={cId}
-      onClick={handleClick}
-      onBlur={handleInput}
-      contentEditable={true}
+      onClick={env == "development" ? handleClick : () => {}}
+      onBlur={env == "development" ? handleInput : () => {}}
+      contentEditable={env == "development" ? true : false}
       spellCheck={false}
-      className={`${My_Component?.Font_Style} h-fit w-fit ${env != "development" ? "cursor-pointer" : "cursor-text"}`}
-      href={link}
+      className={`${My_Component?.Font_Style} h-fit w-fit ${env == "development" ? "cursor-text" : "cursor-default"}`}
+      href={`${link}`}
       style={{
         fontSize: `${My_Component?.Font_Size}px`,
         fontWeight: `${My_Component?.Font_Weight}`,

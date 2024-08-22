@@ -18,7 +18,7 @@ const Editor_C_Topbar = () => {
   return (
     <div className="flex h-full w-full items-center justify-between border-b-[1px] border-neutral-700 p-6">
       {/* Title */}
-      <Link href={`http://localhost:3000/dashboard/${""}`}>
+      <Link href={`http://localhost:3000/dashboard/1`}>
         <div className="flex items-center justify-center gap-[8px]">
           <Flame size={32} />
           {/* bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 */}

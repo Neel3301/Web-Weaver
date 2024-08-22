@@ -1,7 +1,7 @@
 "use client";
-
+import * as LucidIcons from "lucide-react";
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
-import { Italic, Link, Underline, X } from "lucide-react";
+import { AxeIcon, Icon, Italic, Link, Underline, X } from "lucide-react";
 import { Toolbox } from "./Text_Toolbox";
 import { Slider } from "../ui/slider";
 import { Input } from "../ui/input";
@@ -14,6 +14,16 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Font_List } from "@/constants/studio/font_list";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import Icon_List from "@/constants/studio/icon_list";
 
 const Btn_Toolbox = () => {
   // using toolbox store
@@ -44,6 +54,11 @@ const Btn_Toolbox = () => {
 
     Set_Link,
 
+    Set_Border_Radius_Tl,
+    Set_Border_Radius_Tr,
+    Set_Border_Radius_Bl,
+    Set_Border_Radius_Br,
+
     Selected_Id,
 
     Btn_Component,
@@ -71,6 +86,11 @@ const Btn_Toolbox = () => {
 
     s.Set_Link,
 
+    s.Set_Border_Radius_Tl,
+    s.Set_Border_Radius_Tr,
+    s.Set_Border_Radius_Bl,
+    s.Set_Border_Radius_Br,
+
     s.Selected_Id,
 
     s.Btn_Components,
@@ -85,11 +105,13 @@ const Btn_Toolbox = () => {
   };
   // size
   const Handle_Size = (value: any) => {
-    Set_Font_Size(Selected_Id!, value["0"]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Font_Size(Selected_Id!, value);
   };
   // weight
   const Handle_Weight = (value: any) => {
-    Set_Font_Weight(Selected_Id!, value[0]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Font_Weight(Selected_Id!, value);
   };
   // color
   const Handle_Color = (e: any) => {
@@ -111,7 +133,8 @@ const Btn_Toolbox = () => {
   };
   // border width
   const Handle_Border_Width = (value: any) => {
-    Set_Border_Width(Selected_Id!, value[0]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Border_Width(Selected_Id!, value);
   };
   // border color
   const Handle_Border_Color = (e: any) => {
@@ -119,11 +142,13 @@ const Btn_Toolbox = () => {
   };
   // pad x
   const Handle_Pad_X = (value: any) => {
-    Set_Pad_X(Selected_Id!, value[0]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Pad_X(Selected_Id!, value);
   };
   // pad y
   const Handle_Pad_Y = (value: any) => {
-    Set_Pad_Y(Selected_Id!, value[0]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Pad_Y(Selected_Id!, value);
   };
 
   // hover border color
@@ -141,16 +166,41 @@ const Btn_Toolbox = () => {
 
   // height
   const Handle_Line_Height = (value: any) => {
-    Set_Line_Height(Selected_Id!, value[0]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Line_Height(Selected_Id!, value);
   };
   // spacing
   const Handle_Letter_Spacing = (value: any) => {
-    Set_Letter_Spacing(Selected_Id!, value[0]);
+    value = typeof value == "string" ? value : value["0"];
+    Set_Letter_Spacing(Selected_Id!, value);
   };
+
+  // border radius tl
+  const Handle_Border_Radius_Tl = (e: any) => {
+    Set_Border_Radius_Tl(Selected_Id!, e.target.value);
+  };
+  // border radius tr
+  const Handle_Border_Radius_Tr = (e: any) => {
+    Set_Border_Radius_Tr(Selected_Id!, e.target.value);
+  };
+  // border radius bl
+  const Handle_Border_Radius_Bl = (e: any) => {
+    Set_Border_Radius_Bl(Selected_Id!, e.target.value);
+  };
+  // border radius br
+  const Handle_Border_Radius_Br = (e: any) => {
+    Set_Border_Radius_Br(Selected_Id!, e.target.value);
+  };
+
   // link
   const Handle_Link = (e: any) => {
     Set_Link(Selected_Id!, e.target.value);
   };
+
+  // Object.keys(LucidIcons)
+  //   .slice(0, 10)
+  //   .map((x) => console.log(x));
+
   return (
     <div className="h-full w-full border-r-[1px] border-neutral-700">
       {/* text editor title  */}
@@ -191,16 +241,25 @@ const Btn_Toolbox = () => {
           </div>
         </Toolbox>
         {/* size */}
-        <Toolbox heading="Select Font Size">
+        <Toolbox
+          heading="Select Font Size"
+          handleChange={(e: any) => Handle_Size(e.target.value)}
+          value={My_Component?.Font_Size}
+        >
           <div className="py-[12px]">
             <Slider
               defaultValue={[My_Component?.Font_Size || 0]}
               max={100}
               step={1}
+              value={[My_Component?.Font_Size || 0]}
               onValueChange={Handle_Size}
               className="w-full bg-white"
             />
           </div>
+        </Toolbox>
+        {/* Icons */}
+        <Toolbox heading="Select Icons">
+          <Icon_Dialog />
         </Toolbox>
         {/* color */}
         <Toolbox heading="Select Text Color">
@@ -236,6 +295,17 @@ const Btn_Toolbox = () => {
             </div>
           </div>
         </Toolbox>
+        {/* Bg color */}
+        <Toolbox heading="Select Background Color">
+          <div>
+            <input
+              type="color"
+              value={My_Component?.Bg_Color}
+              onInput={Handle_Bg_Color}
+              className="inset-0 h-[32px] w-full border-none bg-transparent outline-none"
+            />
+          </div>
+        </Toolbox>
         {/* Add Link */}
         <Toolbox heading="Add Link">
           <div className="py-[12px]">
@@ -249,37 +319,184 @@ const Btn_Toolbox = () => {
             </div>
           </div>
         </Toolbox>
+        {/* Border Color */}
+        <Toolbox heading="Select Border Color">
+          <div>
+            <input
+              type="color"
+              value={My_Component?.Border_Color}
+              onInput={Handle_Border_Color}
+              className="inset-0 h-[32px] w-full border-none bg-transparent outline-none"
+            />
+          </div>
+        </Toolbox>
+        {/* Border Width */}
+        <Toolbox
+          heading="Select Border Width"
+          handleChange={(e: any) => Handle_Border_Width(e.target.value)}
+          value={My_Component?.Border_Width}
+        >
+          <div className="py-[12px]">
+            <Slider
+              defaultValue={[My_Component?.Border_Width || 0]}
+              max={10}
+              step={1}
+              value={[My_Component?.Border_Width || 0]}
+              onValueChange={Handle_Border_Width}
+              className="w-full bg-white"
+            />
+          </div>
+        </Toolbox>
+        {/* Border radius */}
+        <Toolbox heading="Select Border Radius">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex h-[34px] w-full items-center overflow-hidden rounded-[8px] border-[2px] border-neutral-700 bg-black">
+              <Input
+                type="number"
+                className="border-none"
+                placeholder="Tl"
+                onChange={Handle_Border_Radius_Tl}
+              />
+            </div>
+            <div className="flex h-[34px] w-full items-center overflow-hidden rounded-[8px] border-[2px] border-neutral-700 bg-black">
+              <Input
+                type="number"
+                className="border-none"
+                placeholder="Tr"
+                onChange={Handle_Border_Radius_Tr}
+              />
+            </div>
+            <div className="flex h-[34px] w-full items-center overflow-hidden rounded-[8px] border-[2px] border-neutral-700 bg-black">
+              <Input
+                type="number"
+                className="border-none"
+                placeholder="Bl"
+                onChange={Handle_Border_Radius_Bl}
+              />
+            </div>
+            <div className="flex h-[34px] w-full items-center overflow-hidden rounded-[8px] border-[2px] border-neutral-700 bg-black">
+              <Input
+                type="number"
+                className="border-none"
+                placeholder="Br"
+                onChange={Handle_Border_Radius_Br}
+              />
+            </div>
+          </div>
+        </Toolbox>
+        {/* Pad X */}
+        <Toolbox
+          heading="Select Padding X"
+          handleChange={(e: any) => Handle_Pad_X(e.target.value)}
+          value={My_Component?.Pad_X}
+        >
+          <div className="py-[12px]">
+            <Slider
+              defaultValue={[My_Component?.Pad_X || 0]}
+              max={100}
+              step={1}
+              value={[My_Component?.Pad_X || 0]}
+              onValueChange={Handle_Pad_X}
+              className="w-full bg-white"
+            />
+          </div>
+        </Toolbox>
+        {/* Pad X */}
+        <Toolbox
+          heading="Select Padding Y"
+          handleChange={(e: any) => Handle_Pad_Y(e.target.value)}
+          value={My_Component?.Pad_Y}
+        >
+          <div className="py-[12px]">
+            <Slider
+              defaultValue={[My_Component?.Pad_Y || 0]}
+              max={100}
+              step={1}
+              value={[My_Component?.Pad_Y || 0]}
+              onValueChange={Handle_Pad_Y}
+              className="w-full bg-white"
+            />
+          </div>
+        </Toolbox>
+        {/* HOver Border Color */}
+        <Toolbox heading="Select Hover Border Color">
+          <div>
+            <input
+              type="color"
+              value={My_Component?.Hover_Border_Color}
+              onInput={Handle_Hover_Border_Color}
+              className="inset-0 h-[32px] w-full border-none bg-transparent outline-none"
+            />
+          </div>
+        </Toolbox>
+        {/* Hover Bg Color */}
+        <Toolbox heading="Select Hover Bg Color">
+          <div>
+            <input
+              type="color"
+              value={My_Component?.Hover_Bg_Color}
+              onInput={Handle_Hover_Bg_Color}
+              className="inset-0 h-[32px] w-full border-none bg-transparent outline-none"
+            />
+          </div>
+        </Toolbox>
+        {/* Hover Text Color */}
+        <Toolbox heading="Select Hover Text Color">
+          <div>
+            <input
+              type="color"
+              value={My_Component?.Hover_Text_Color}
+              onInput={Handle_Hover_Text_Color}
+              className="inset-0 h-[32px] w-full border-none bg-transparent outline-none"
+            />
+          </div>
+        </Toolbox>
         {/* weight */}
-        <Toolbox heading="Select Font Weight">
+        <Toolbox
+          heading="Select Font Weight"
+          handleChange={(e: any) => Handle_Weight(e.target.value)}
+          value={My_Component?.Font_Weight}
+        >
           <div className="py-[12px]">
             <Slider
               defaultValue={[My_Component?.Font_Weight || 0]}
               max={1000}
               step={1}
+              value={[My_Component?.Font_Weight || 0]}
               className="w-full bg-white"
               onValueChange={Handle_Weight}
             />
           </div>
         </Toolbox>
         {/* Lineheight */}
-        <Toolbox heading="Select Line Height">
+        <Toolbox
+          heading="Select Line Height"
+          handleChange={(e: any) => Handle_Line_Height(e.target.value)}
+          value={My_Component?.Line_Height}
+        >
           <div className="py-[12px]">
             <Slider
               defaultValue={[My_Component?.Line_Height || 0]}
               max={100}
               step={1}
+              value={[My_Component?.Line_Height || 0]}
               className="w-full bg-white"
               onValueChange={Handle_Line_Height}
             />
           </div>
         </Toolbox>
         {/* letter spacing */}
-        <Toolbox heading="Select Letter Spacing">
+        <Toolbox
+          heading="Select Letter Spacing"
+          handleChange={(e: any) => Handle_Letter_Spacing(e.target.value)}
+          value={My_Component?.Letter_Spacing}
+        >
           <div className="py-[12px]">
             <Slider
               defaultValue={[My_Component?.Letter_Spacing || 0]}
               max={100}
               step={1}
+              value={[My_Component?.Letter_Spacing || 0]}
               className="w-full bg-white"
               onValueChange={Handle_Letter_Spacing}
             />
@@ -287,6 +504,74 @@ const Btn_Toolbox = () => {
         </Toolbox>
       </div>
     </div>
+  );
+};
+
+const Icon_Dialog = () => {
+  const [Set_Icon, Selected_Id, Btn_Component] = use_Btn_Store((s) => [
+    s.Set_Icon,
+    s.Selected_Id,
+    s.Btn_Components,
+  ]);
+
+  // finding component
+  const My_Component = Btn_Component.find((x) => x.Id === Selected_Id);
+
+  const Handle_Icon = (e: any) => {
+    const icon = e.currentTarget.getAttribute("value");
+    if (My_Component?.Icon == icon) {
+      Set_Icon(Selected_Id!, "");
+    } else {
+      Set_Icon(Selected_Id!, icon);
+    }
+  };
+
+  return (
+    <Dialog>
+      <DialogTrigger>
+        <Button variant={"outline"} className="w-[calc(250px-12px-12px-12px)]">
+          Select
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="overflow-scroll border-[2px] border-neutral-300 bg-black">
+        <DialogHeader className="">
+          <DialogTitle className="border-b-[1px] border-neutral-300 text-[32px] text-white">
+            Select Icon
+          </DialogTitle>
+        </DialogHeader>
+        <div className="h-[500px]">
+          <div className="flex flex-wrap items-center justify-between gap-[12px] overflow-scroll text-white">
+            {Icon_List.map((iconName) => {
+              // const IconComponent = LucidIcons[iconName];
+              const IconComponent = (LucidIcons as any)[
+                iconName
+              ] as React.ComponentType<{ size?: number }>;
+
+              if (!IconComponent) {
+                // Handle the case where the icon is not found
+                return (
+                  <div key={iconName}>
+                    <div>NF</div>
+                  </div>
+                );
+              }
+
+              return (
+                <DialogClose key={iconName}>
+                  <button
+                    className={`cursor-pointer rounded-[12px] border-[1px] border-transparent p-[12px] hover:bg-gray-900 ${My_Component?.Icon == iconName && `border-white bg-gray-900`}`}
+                    value={iconName}
+                    onClick={Handle_Icon}
+                  >
+                    <IconComponent size={28} />
+                  </button>
+                </DialogClose>
+              );
+            })}
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 

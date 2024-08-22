@@ -1,4 +1,4 @@
-import Dashboard_C_Template_Card from "@/components/studio/dashboard/components/Dashboard_C_Template_Card";
+import Dashboard_C_Template_Card from "@/components/studio/dashboard/Dashboard_C_Template_Card";
 import { Eye } from "lucide-react";
 
 const Dashboard_S_Template = ({
