@@ -1,5 +1,6 @@
 import Btn from "@/components/utils/Btn";
 import Icon from "@/components/utils/Icon";
+import Image from "@/components/utils/Image";
 import Text from "@/components/utils/Text";
 import { poppins } from "@/constants/studio/font_list";
 
@@ -67,7 +68,14 @@ const T1_Landing = () => {
       </div>
 
       {/* right */}
-      <div className="flex h-full w-[50%] flex-col items-center justify-center"></div>
+      <div className="flex h-full w-[50%] flex-col items-center justify-center">
+        <Image
+          cid="t1-landing"
+          img="/T1/landing.png"
+          height={500}
+          width={400}
+        />
+      </div>
     </div>
   );
 };

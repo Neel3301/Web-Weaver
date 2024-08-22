@@ -1,3 +1,4 @@
+"use client";
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 import { use_Image_Store } from "@/store/utils/Image_Store";
 import { usePathname } from "next/navigation";
