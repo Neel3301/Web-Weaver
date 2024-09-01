@@ -43,13 +43,13 @@ const Editor_C_Topbar = () => {
         </div>
         <div
           className={`cursor-pointer ${Mockup == "Tablet" && "text-blue-500"}`}
-          // onClick={() => Set_MockUP("Tablet")}
+          onClick={() => Set_MockUP("Tablet")}
         >
           <Tablet />
         </div>
         <div
           className={`cursor-pointer ${Mockup == "Mobile" && "text-blue-500"}`}
-          // onClick={() => Set_MockUP("Mobile")}
+          onClick={() => Set_MockUP("Mobile")}
         >
           <Smartphone />
         </div>

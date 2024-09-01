@@ -14,19 +14,19 @@ const Image_Toolbox = () => {
   );
 
   const [
-    setBorderRadius,
-    setHeight,
-    setWidth,
-    setMaxHeight,
-    setMaxWidth,
-    setMinHeight,
-    setMinWidth,
-    setImg,
-    ImageComponents,
-    addImageComponent,
+    Set_Border_Radius,
+    Set_Height,
+    Set_Width,
+    Set_Max_Height,
+    Set_Max_Width,
+    Set_Min_Height,
+    Set_Min_Width,
+    Set_Img,
+    Image_Components,
+    Add_Image_Component,
     selectedId,
-    setObject,
-    setDisplayImg,
+    Set_Object,
+    Set_Display_Img,
   ] = use_Image_Store((s) => [
     s.Set_Border_Radius,
     s.Set_Height,
@@ -43,36 +43,36 @@ const Image_Toolbox = () => {
     s.Set_Display_Img,
   ]);
 
-  const component = ImageComponents.find(
+  const component = Image_Components.find(
     (myComponent) => myComponent.Id === selectedId
   );
 
-  const handleBorderRadius = (e: any) => {
-    setBorderRadius(selectedId!, e);
+  const Handle_Border_Radius = (e: any) => {
+    Set_Border_Radius(selectedId!, e);
   };
-  const handleHeight = (e: any) => {
-    setHeight(selectedId!, e);
+  const Handle_Height = (e: any) => {
+    Set_Height(selectedId!, e);
   };
-  const handleWidth = (e: any) => {
-    setWidth(selectedId!, e);
+  const Handle_Width = (e: any) => {
+    Set_Width(selectedId!, e);
   };
-  const handleMaxHeight = (e: any) => {
-    setMaxHeight(selectedId!, e);
+  const Handle_Max_Height = (e: any) => {
+    Set_Max_Height(selectedId!, e);
   };
-  const handleMaxWidth = (e: any) => {
-    setMaxWidth(selectedId!, e);
+  const Handle_Max_Width = (e: any) => {
+    Set_Max_Width(selectedId!, e);
   };
-  const handleMinHeight = (e: any) => {
-    setMinHeight(selectedId!, e);
+  const Handle_Min_Height = (e: any) => {
+    Set_Min_Height(selectedId!, e);
   };
-  const handleMinWidth = (e: any) => {
-    setMinWidth(selectedId!, e);
+  const Handle_Min_Width = (e: any) => {
+    Set_Min_Width(selectedId!, e);
   };
 
-  const handleObject = (
+  const Handle_Object = (
     value: "fill" | "contain" | "cover" | "none" | "scale-down"
   ) => {
-    setObject(selectedId!, value);
+    Set_Object(selectedId!, value);
   };
 
   const [selectedImage, setSelectedImage] = useState("");
@@ -88,8 +88,8 @@ const Image_Toolbox = () => {
         if (reader.result && typeof reader.result === "string") {
           const result = reader.result as string;
           setSelectedImage(result);
-          setDisplayImg(selectedId!, result);
-          setImg(selectedId!, result);
+          Set_Display_Img(selectedId!, result);
+          Set_Img(selectedId!, result);
         }
       };
     }
@@ -137,7 +137,7 @@ const Image_Toolbox = () => {
         {/* Image Height */}
         <Toolbox
           heading="Select Image Height"
-          handleChange={(e: any) => handleHeight(e.target.value)}
+          handleChange={(e: any) => Handle_Height(e.target.value)}
           value={component?.Height}
         >
           <div className="py-[12px]">
@@ -147,7 +147,7 @@ const Image_Toolbox = () => {
               step={1}
               value={[component?.Height || 0]}
               className="w-full bg-white"
-              onValueChange={handleHeight}
+              onValueChange={Handle_Height}
             />
           </div>
         </Toolbox>
@@ -155,7 +155,7 @@ const Image_Toolbox = () => {
         {/* Image Width */}
         <Toolbox
           heading="Select Image Width"
-          handleChange={(e: any) => handleWidth(e.target.value)}
+          handleChange={(e: any) => Handle_Width(e.target.value)}
           value={component?.Width}
         >
           <div className="py-[12px]">
@@ -165,7 +165,7 @@ const Image_Toolbox = () => {
               step={1}
               value={[component?.Width || 0]}
               className="w-full bg-white"
-              onValueChange={handleWidth}
+              onValueChange={Handle_Width}
             />
           </div>
         </Toolbox>
@@ -173,7 +173,7 @@ const Image_Toolbox = () => {
         {/* Border Radius */}
         <Toolbox
           heading="Select Border Radius"
-          handleChange={(e: any) => handleBorderRadius(e.target.value)}
+          handleChange={(e: any) => Handle_Border_Radius(e.target.value)}
           value={component?.Border_Radius}
         >
           <div className="py-[12px]">
@@ -183,7 +183,7 @@ const Image_Toolbox = () => {
               step={1}
               value={[component?.Border_Radius || 0]}
               className="w-full bg-white"
-              onValueChange={handleBorderRadius}
+              onValueChange={Handle_Border_Radius}
             />
           </div>
         </Toolbox>
@@ -193,19 +193,19 @@ const Image_Toolbox = () => {
           <div className="flex items-center justify-between py-[12px]">
             <div
               className={`flex cursor-pointer items-center justify-center rounded-[4px] px-[12px] py-[8px] ${component?.Object === "fill" && "border-[1px]"} hover:border-[1px]`}
-              onClick={() => handleObject("fill")}
+              onClick={() => Handle_Object("fill")}
             >
               Fill
             </div>
             <div
               className={`flex cursor-pointer items-center justify-center rounded-[4px] px-[12px] py-[8px] ${component?.Object === "contain" && "border-[1px]"} hover:border-[1px]`}
-              onClick={() => handleObject("contain")}
+              onClick={() => Handle_Object("contain")}
             >
               Contain
             </div>{" "}
             <div
               className={`flex cursor-pointer items-center justify-center rounded-[4px] px-[12px] py-[8px] ${component?.Object === "cover" && "border-[1px]"} hover:border-[1px]`}
-              onClick={() => handleObject("cover")}
+              onClick={() => Handle_Object("cover")}
             >
               Cover
             </div>
@@ -215,7 +215,7 @@ const Image_Toolbox = () => {
         {/* Max Height */}
         <Toolbox
           heading="Select Max Height"
-          handleChange={(e: any) => handleMaxHeight(e.target.value)}
+          handleChange={(e: any) => Handle_Max_Height(e.target.value)}
           value={component?.Max_Height}
         >
           <div className="py-[12px]">
@@ -225,7 +225,7 @@ const Image_Toolbox = () => {
               step={1}
               value={[component?.Max_Height || 0]}
               className="w-full bg-white"
-              onValueChange={handleMaxHeight}
+              onValueChange={Handle_Max_Height}
             />
           </div>
         </Toolbox>
@@ -233,7 +233,7 @@ const Image_Toolbox = () => {
         {/* Max Width */}
         <Toolbox
           heading="Select Max Width"
-          handleChange={(e: any) => handleMaxWidth(e.target.value)}
+          handleChange={(e: any) => Handle_Max_Width(e.target.value)}
           value={component?.Max_Width}
         >
           <div className="py-[12px]">
@@ -243,7 +243,7 @@ const Image_Toolbox = () => {
               step={1}
               value={[component?.Max_Width || 0]}
               className="w-full bg-white"
-              onValueChange={handleMaxWidth}
+              onValueChange={Handle_Max_Width}
             />
           </div>
         </Toolbox>
@@ -251,7 +251,7 @@ const Image_Toolbox = () => {
         {/* Min Height */}
         <Toolbox
           heading="Select Min Height"
-          handleChange={(e: any) => handleMinHeight(e.target.value)}
+          handleChange={(e: any) => Handle_Min_Height(e.target.value)}
           value={component?.Min_Height}
         >
           <div className="py-[12px]">
@@ -261,7 +261,7 @@ const Image_Toolbox = () => {
               step={1}
               value={[component?.Min_Height || 0]}
               className="w-full bg-white"
-              onValueChange={handleMinHeight}
+              onValueChange={Handle_Min_Height}
             />
           </div>
         </Toolbox>
@@ -269,7 +269,7 @@ const Image_Toolbox = () => {
         {/* Min Width */}
         <Toolbox
           heading="Select Min Width"
-          handleChange={(e: any) => handleMinWidth(e.target.value)}
+          handleChange={(e: any) => Handle_Min_Width(e.target.value)}
           value={component?.Min_Width}
         >
           <div className="py-[12px]">
@@ -279,7 +279,7 @@ const Image_Toolbox = () => {
               step={1}
               value={[component?.Min_Width || 0]}
               className="w-full bg-white"
-              onValueChange={handleMinWidth}
+              onValueChange={Handle_Min_Width}
             />
           </div>
         </Toolbox>

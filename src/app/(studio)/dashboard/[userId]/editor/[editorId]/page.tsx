@@ -1,9 +1,9 @@
 "use client";
 import Div_Toolbox from "@/components/utils/Div_Toolbox";
 import Image_Toolbox from "@/components/utils/Image_Toolbox";
-import Editor_C_Sidebar from "@/components/studio/editor/components/Editor_C_Sidebar";
+import Editor_C_Sidebar from "@/components/studio/editor/Editor_C_Sidebar";
 import Text_Toolbox from "@/components/utils/Text_Toolbox";
-import Editor_C_Topbar from "@/components/studio/editor/components/Editor_C_Topbar";
+import Editor_C_Topbar from "@/components/studio/editor/Editor_C_Topbar";
 import Editor_S_Mockup from "@/components/studio/editor/Editor_S_Mockup";
 import ShootingStars from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";

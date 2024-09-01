@@ -15,7 +15,7 @@ const poppins = Poppins({
 interface Btn_Props {
   cId: string;
   children?: string;
-  tag: keyof JSX.IntrinsicElements | React.ComponentType<any>;
+  tag?: keyof JSX.IntrinsicElements | React.ComponentType<any>;
 
   fontStyle?: string;
   fontSize?: number;
@@ -135,7 +135,8 @@ const Btn = ({
   const My_Component = Btn_Component.find((x) => x.Id === cId);
 
   // handle click
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     Btn_Toolbox_On_Open();
     Set_Selected_Id(cId);
   };

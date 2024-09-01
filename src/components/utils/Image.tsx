@@ -6,7 +6,7 @@ import { useState } from "react";
 
 // Interface
 interface Image_Props {
-  cid: string;
+  cId: string;
   img: string;
   classname?: string;
   env?: "production" | "development";
@@ -22,10 +22,9 @@ interface Image_Props {
 }
 
 const Image = ({
-  cid,
+  cId,
   img,
   classname,
-  env = "development",
   borderRadius,
   height,
   width,
@@ -37,11 +36,11 @@ const Image = ({
 }: Image_Props) => {
   //  Image Store
   const [
-    addImageComponent,
-    ImageComponents,
-    setSelectedId,
-    setImg,
-    setDisplayImg,
+    Add_Image_Component,
+    Image_Components,
+    Set_Selected_Id,
+    Set_Img,
+    Set_Display_Img,
   ] = use_Image_Store((s) => [
     s.Add_Image_Component,
     s.Image_Components,
@@ -51,28 +50,26 @@ const Image = ({
   ]);
 
   // Adding Component
-  const [initialized, setInitialized] = useState(false);
-  const existingComponent = ImageComponents.find(
-    (myComponent) => myComponent.Id === cid
+  const Existing_Component = Image_Components.find(
+    (myComponent) => myComponent.Id === cId
   );
-  if (!existingComponent) {
-    if (!initialized) {
-      addImageComponent({
-        Id: cid,
-        Img: img,
-        Img_Url: "",
-        Display_Img: img,
-        Border_Radius: borderRadius === undefined ? 0 : borderRadius,
-        Height: height === undefined ? 100 : height,
-        Width: width === undefined ? 100 : width,
-        Max_Height: maxHeight!,
-        Max_Width: maxWidth!,
-        Min_Height: minHeight!,
-        Min_Width: minWidth!,
-        Object: object!,
-      });
-      setInitialized(true);
-    }
+  const [initialized, setInitialized] = useState(false);
+  if (!Existing_Component && !initialized) {
+    Add_Image_Component({
+      Id: cId,
+      Img: img,
+      Img_Url: "",
+      Display_Img: img,
+      Border_Radius: borderRadius === undefined ? 0 : borderRadius,
+      Height: height === undefined ? 100 : height,
+      Width: width === undefined ? 100 : width,
+      Max_Height: maxHeight!,
+      Max_Width: maxWidth!,
+      Min_Height: minHeight!,
+      Min_Width: minWidth!,
+      Object: object!,
+    });
+    setInitialized(true);
   }
   // Model Store
   const Image_Toolbox_On_Open = use_Toolbox_Store(
@@ -80,45 +77,47 @@ const Image = ({
   );
 
   // Finding Component
-  const component = ImageComponents.find(
-    (myComponent) => myComponent.Id === cid
+  const My_Component = Image_Components.find(
+    (myComponent) => myComponent.Id === cId
   );
 
   // Setting Environment
+  let env = "development";
   const path = usePathname();
   if (path.startsWith("/web/")) {
     env = "production";
   }
 
   // Handle Click
-  const handleClick = () => {
-    setSelectedId(cid);
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    Set_Selected_Id(cId);
     Image_Toolbox_On_Open();
-    setDisplayImg(cid, component!.Img);
+    Set_Display_Img(cId, My_Component!.Img);
   };
 
   return (
     <div
       style={{
-        height: `${component?.Height}px`,
-        width: `${component?.Width}px`,
-        minHeight: `${component?.Min_Height}px`,
-        minWidth: `${component?.Min_Width}px`,
-        maxHeight: `${component?.Max_Height}px`,
-        maxWidth: `${component?.Max_Width}px`,
+        height: `${My_Component?.Height}px`,
+        width: `${My_Component?.Width}px`,
+        minHeight: `${My_Component?.Min_Height}px`,
+        minWidth: `${My_Component?.Min_Width}px`,
+        maxHeight: `${My_Component?.Max_Height}px`,
+        maxWidth: `${My_Component?.Max_Width}px`,
       }}
       className="resize"
-      onClick={handleClick}
+      onClick={env == "development" ? handleClick : () => {}}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={component?.Img}
+        src={My_Component?.Img}
         alt={img}
-        id={cid}
+        id={cId}
         className={`${classname} h-full w-full`}
         style={{
-          objectFit: `${component?.Object!}`,
-          borderRadius: `${component?.Border_Radius}px`,
+          objectFit: `${My_Component?.Object!}`,
+          borderRadius: `${My_Component?.Border_Radius}px`,
         }}
       />
     </div>

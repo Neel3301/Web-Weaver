@@ -4,6 +4,7 @@ import { use_Text_Store } from "@/store/utils/Text_Store";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import { Children, useState } from "react";
 
 const poppins = Poppins({
@@ -14,7 +15,7 @@ const poppins = Poppins({
 interface Text_Props {
   cId: string;
   children?: string;
-  tag: keyof JSX.IntrinsicElements | React.ComponentType<any>;
+  tag?: keyof JSX.IntrinsicElements | React.ComponentType<any>;
 
   fontStyle?: string;
   fontSize?: number;
@@ -34,7 +35,7 @@ interface Text_Props {
 const Text = ({
   cId,
   children = "text",
-  tag = "span",
+  tag = "p",
 
   fontStyle = poppins.className,
   fontSize = 18,
@@ -96,12 +97,12 @@ const Text = ({
   const My_Component = Text_Component.find((x) => x.Id === cId);
 
   // handle click
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // window.parent.postMessage(
     //   { action: "openSidebar", id: cId, My_Component: My_Component },
     //   "*"
     // );
-
+    e.stopPropagation();
     Text_Toolbox_On_Open();
     Set_Selected_Id(cId);
   };
@@ -133,7 +134,7 @@ const Text = ({
       onBlur={env == "development" ? handleInput : () => {}}
       contentEditable={env == "development" ? true : false}
       spellCheck={false}
-      className={`${My_Component?.Font_Style} h-fit w-fit ${env == "development" ? "cursor-text" : "cursor-default"}`}
+      className={`${My_Component?.Font_Style} z-50 h-fit w-fit ${env == "development" ? "cursor-text" : "cursor-default"}`}
       href={`${link}`}
       style={{
         fontSize: `${My_Component?.Font_Size}px`,
