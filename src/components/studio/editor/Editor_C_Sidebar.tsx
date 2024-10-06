@@ -17,7 +17,7 @@ const Editor_C_Sidebar = () => {
       {/* toolkit */}
       <div className="flex h-[calc(100vh-80px-66px)] w-full items-center justify-center overflow-y-scroll px-4">
         <h2 className={`text-center text-[24px] text-neutral-200`}>
-          Click on Text, Button, Image To Edit The Template
+          Click on Text, Button, Image or Icon To Edit The Template
         </h2>
       </div>
     </div>

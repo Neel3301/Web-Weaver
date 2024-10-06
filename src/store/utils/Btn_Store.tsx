@@ -33,6 +33,8 @@ interface Btn_Component {
   Letter_Spacing?: number;
 
   Link?: string;
+
+  Classname?: string;
 }
 
 interface Btn_Store {
@@ -71,6 +73,8 @@ interface Btn_Store {
   Set_Letter_Spacing: (Id: string, Letter_Spacing: number) => void;
 
   Set_Link: (Id: string, Set_Link: string) => void;
+
+  Set_Classname: (Id: string, CLassname: string) => void;
 
   Selected_Id: string | null;
   Set_Selected_Id: (Id: string | null) => void;
@@ -262,6 +266,14 @@ export const use_Btn_Store = create<Btn_Store>((set) => ({
     set((state) => ({
       Btn_Components: state.Btn_Components.map((component) =>
         component.Id === Id ? { ...component, Link } : component
+      ),
+    }));
+  },
+
+  Set_Classname: (Id, Classname) => {
+    set((state) => ({
+      Btn_Components: state.Btn_Components.map((component) =>
+        component.Id === Id ? { ...component, Classname } : component
       ),
     }));
   },

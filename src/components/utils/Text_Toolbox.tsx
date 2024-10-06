@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Font_List } from "@/constants/studio/font_list";
+import { sendMessageToIframe } from "@/hooks/studio/Send_Msg_To_Iframe";
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 import { use_Text_Store } from "@/store/utils/Text_Store";
 import {
@@ -18,105 +19,167 @@ import {
   AlignLeft,
   AlignRight,
   Italic,
-  Link,
+  Link2,
   Underline,
   X,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Text_Toolbox = () => {
-  // Tollbox store
+  // Import From Toolbox store
   const Text_Toolbox_On_Close = use_Toolbox_Store(
     (s) => s.Text_Toolbox_On_Close
   );
+  const Text_Toolbox_On_Open = use_Toolbox_Store((s) => s.Text_Toolbox_On_Open);
+  const Text_Toolbox_Is_Open = use_Toolbox_Store((s) => s.Text_Toolbox_Is_Open);
 
-  // text_Store
-  const [
-    Set_Font_Style,
-    Set_Font_Size,
-    Set_Font_Weight,
+  // Import From Text Store
+  const Selected_Id = use_Text_Store((s) => s.Selected_Id);
+  const Set_Selected_Id = use_Text_Store((s) => s.Set_Selected_Id);
 
-    Set_Text_Color,
-    Set_Text_Alignment,
-    Set_Text_Underline,
+  // Local State
+  const [Font_Style, Set_Font_Style] = useState<string>("");
+  const [Font_Size, Set_Font_Size] = useState<number>(0);
+  const [Font_Weight, Set_Font_Weight] = useState<number>(0);
+  const [Text_Color, Set_Text_Color] = useState<number>(0);
+  const [Text_Alignment, Set_Text_Alignment] = useState<string>("");
+  const [Text_Underline, Set_Text_Underline] = useState<boolean>(false);
+  const [Text_Italic, Set_Text_Italic] = useState<boolean>(false);
+  const [Line_Height, Set_Line_Height] = useState<number | null>(0);
+  const [Letter_Spacing, Set_Letter_Spacing] = useState<number | null>(0);
+  const [Link, Set_Link] = useState<string | null>();
 
-    Set_Text_Italic,
-    Set_Line_Height,
-    Set_Letter_Spacing,
-
-    Set_Link,
-
-    Selected_Id,
-
-    Text_Component,
-  ] = use_Text_Store((s) => [
-    s.Set_Font_Style,
-    s.Set_Font_Size,
-    s.Set_Font_Weight,
-
-    s.Set_Text_Color,
-    s.Set_Text_Alignment,
-    s.Set_Text_Underline,
-
-    s.Set_Text_Italic,
-    s.Set_Line_Height,
-    s.Set_Letter_Spacing,
-
-    s.Set_Link,
-
-    s.Selected_Id,
-
-    s.Text_Components,
-  ]);
-
-  // finding component
-  const My_Component = Text_Component.find((x) => x.Id === Selected_Id);
-
-  // style
+  // Style
   const Handle_Style = (value: string) => {
-    Set_Font_Style(Selected_Id!, value);
+    Set_Font_Style(value);
+    sendMessageToIframe({
+      type: "UPDATE_TEXT_COMPONENT_FONT_STYLE",
+      id: Selected_Id,
+      fontStyle: value,
+    });
   };
-  // size
+
+  // Size
   const Handle_Size = (value: any) => {
     value = typeof value == "string" ? value : value["0"];
-    Set_Font_Size(Selected_Id!, value);
+    Set_Font_Size(value);
+    sendMessageToIframe({
+      type: "UPDATE_TEXT_COMPONENT_FONT_SIZE",
+      id: Selected_Id,
+      fontSize: value,
+    });
   };
-  // weight
+  // Weight
   const Handle_Weight = (value: any) => {
     value = typeof value == "string" ? value : value["0"];
-    Set_Font_Weight(Selected_Id!, value);
+    Set_Font_Weight(value);
+    sendMessageToIframe({
+      type: "UPDATE_TEXT_COMPONENT_FONT_WEIGHT",
+      id: Selected_Id,
+      fontWeight: value,
+    });
   };
-  // color
+  // Color
   const Handle_Color = (e: any) => {
-    Set_Text_Color(Selected_Id!, e.target.value);
+    const color = e.target.value;
+    Set_Text_Color(color);
+    sendMessageToIframe({
+      type: "UPDATE_TEXT_COMPONENT_TEXT_COLOR",
+      id: Selected_Id,
+      textColor: color,
+    });
   };
-  // alignment
+  // Alignment
   const Handle_Alignment = (value: string) => {
-    Set_Text_Alignment(Selected_Id!, value);
+    Set_Text_Alignment(value);
+    sendMessageToIframe({
+      type: "UPDATE_TEXT_COMPONENT_TEXT_ALIGNMENT",
+      id: Selected_Id,
+      textAlignment: value,
+    });
   };
-  // underline
+  // Underline
   const Handle_Underline = () => {
-    Set_Text_Underline(Selected_Id!, !My_Component?.Text_Underline);
+    Set_Text_Underline(!Text_Underline);
+    sendMessageToIframe({
+      type: "UPDATE_TEXT_COMPONENT_TEXT_UNDERLINE",
+      id: Selected_Id,
+      textUnderline: !Text_Underline,
+    });
   };
-  // italic
+  // Italic
   const Handle_Italic = () => {
-    Set_Text_Italic(Selected_Id!, !My_Component?.Text_Italic);
+    Set_Text_Italic(!Text_Italic);
+    sendMessageToIframe({
+      type: "UPDATE_TEXT_COMPONENT_TEXT_ITALIC",
+      id: Selected_Id,
+      textItalic: !Text_Italic,
+    });
   };
-  // height
+  // Line Height
   const Handle_Line_Height = (value: any) => {
     value = typeof value == "string" ? value : value["0"];
-    Set_Line_Height(Selected_Id!, value);
+    Set_Line_Height(value);
+    sendMessageToIframe({
+      type: "UPDATE_TEXT_COMPONENT_LINE_HEIGHT",
+      id: Selected_Id,
+      lineHeight: value,
+    });
   };
-  // spacing
+  // Spacing
   const Handle_Letter_Spacing = (value: any) => {
     value = typeof value == "string" ? value : value["0"];
-    Set_Letter_Spacing(Selected_Id!, value);
+    Set_Letter_Spacing(value);
+    sendMessageToIframe({
+      type: "UPDATE_TEXT_COMPONENT_LETTER_SPACING",
+      id: Selected_Id,
+      letterSpacing: value,
+    });
   };
-  // link
+  // Link
   const Handle_Link = (e: any) => {
-    Set_Link(Selected_Id!, e.target.value);
+    const value = e.target.value;
+    Set_Link(value);
+    sendMessageToIframe({
+      type: "UPDATE_TEXT_COMPONENT_LINK",
+      id: Selected_Id,
+      link: value,
+    });
   };
 
-  return (
+  // Receiving Data From Component Setting Id and Default Attributes Value
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      const data = event.data;
+      if (data.type === "SET_TEXT_SELECTED_ID") {
+        // Setting Component ID
+        Set_Selected_Id(data.id);
+
+        // Opening Text Toolbox
+        Text_Toolbox_On_Open();
+
+        // Setting Default Attributes
+        Set_Font_Style(data.attributes.fontStyle);
+        Set_Font_Size(data.attributes.fontSize);
+        Set_Font_Weight(data.attributes.fontWeight);
+        Set_Text_Color(data.attributes.textColor);
+        Set_Text_Alignment(data.attributes.textAlignment);
+        Set_Text_Underline(data.attributes.textUnderline);
+        Set_Text_Italic(data.attributes.textItalic);
+        Set_Line_Height(data.attributes.lineHeight);
+        Set_Letter_Spacing(data.attributes.letterSpacing);
+        Set_Link(data.attributes.link);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, []);
+
+  return Text_Toolbox_Is_Open ? (
     <div className="h-full w-full border-r-[1px] border-neutral-700">
       {/* text editor title  */}
       <div
@@ -134,10 +197,7 @@ const Text_Toolbox = () => {
         {/* fonts  */}
         <Toolbox heading="Select Font Style">
           <div>
-            <Select
-              onValueChange={Handle_Style}
-              value={My_Component?.Font_Style}
-            >
+            <Select onValueChange={Handle_Style} value={Font_Style}>
               <SelectTrigger className="border-none text-neutral-300">
                 <SelectValue placeholder="Select Fonts" />
               </SelectTrigger>
@@ -159,15 +219,18 @@ const Text_Toolbox = () => {
         <Toolbox
           heading="Select Font Size"
           handleChange={(e: any) => Handle_Size(e.target.value)}
-          value={My_Component?.Font_Size}
+          // value={My_Component?.Font_Size}
+          value={Font_Size}
         >
           <div className="py-[12px]">
             <Slider
-              defaultValue={[My_Component?.Font_Size || 0]}
+              // defaultValue={[My_Component?.Font_Size || 0]}
+              defaultValue={[Font_Size || 0]}
               max={100}
               step={1}
               onValueChange={Handle_Size}
-              value={[My_Component?.Font_Size || 0]}
+              // value={[My_Component?.Font_Size || 0]}
+              value={[Font_Size || 0]}
               className="w-full cursor-pointer bg-white"
             />
           </div>
@@ -177,7 +240,7 @@ const Text_Toolbox = () => {
           <div>
             <input
               type="color"
-              // value={component?.textColor}
+              value={Text_Color}
               onInput={Handle_Color}
               className="inset-0 h-[32px] w-full border-none bg-transparent outline-none"
             />
@@ -188,25 +251,25 @@ const Text_Toolbox = () => {
         <Toolbox heading="Select Alignment">
           <div className="flex items-center justify-between py-[12px]">
             <div
-              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] ${My_Component?.Text_Alignment == "left" && "border-[1px]"}`}
+              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] ${Text_Alignment == "left" && "border-[1px]"}`}
               onClick={() => Handle_Alignment("left")}
             >
               <AlignLeft size={24} />
             </div>
             <div
-              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] hover:border-[1px] ${My_Component?.Text_Alignment == "center" && "border-[1px]"}`}
+              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] hover:border-[1px] ${Text_Alignment == "center" && "border-[1px]"}`}
               onClick={() => Handle_Alignment("center")}
             >
               <AlignCenter size={24} />
             </div>
             <div
-              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] hover:border-[1px] ${My_Component?.Text_Alignment == "right" && "border-[1px]"}`}
+              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] hover:border-[1px] ${Text_Alignment == "right" && "border-[1px]"}`}
               onClick={() => Handle_Alignment("right")}
             >
               <AlignRight size={24} />
             </div>
             <div
-              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] hover:border-[1px] ${My_Component?.Text_Alignment == "justify" && "border-[1px]"}`}
+              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] hover:border-[1px] ${Text_Alignment == "justify" && "border-[1px]"}`}
               onClick={() => Handle_Alignment("justify")}
             >
               <AlignJustify size={24} />
@@ -217,13 +280,13 @@ const Text_Toolbox = () => {
         <Toolbox heading="Select Text Decoration">
           <div className="flex items-center justify-between py-[12px]">
             <div
-              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] ${My_Component?.Text_Italic && "border-[1px]"} hover:border-[1px]`}
+              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] ${Text_Italic && "border-[1px]"} hover:border-[1px]`}
               onClick={Handle_Italic}
             >
               <Italic size={24} />
             </div>
             <div
-              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] hover:border-[1px] ${My_Component?.Text_Underline && "border-[1px]"}`}
+              className={`flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-[4px] hover:border-[1px] ${Text_Italic && "border-[1px]"}`}
               onClick={Handle_Underline}
             >
               <Underline size={24} />
@@ -240,11 +303,12 @@ const Text_Toolbox = () => {
         <Toolbox heading="Add Link">
           <div className="py-[12px]">
             <div className="flex w-full items-center overflow-hidden rounded-[8px] border-[2px] border-neutral-700 bg-black px-[12px]">
-              <Link size={24} />
+              <Link2 size={24} />
               <Input
                 className="border-none"
                 placeholder="Past Your Link Here"
                 onChange={Handle_Link}
+                value={Link || ""}
               />
             </div>
           </div>
@@ -253,14 +317,14 @@ const Text_Toolbox = () => {
         <Toolbox
           heading="Select Font Weight"
           handleChange={(e: any) => Handle_Weight(e.target.value)}
-          value={My_Component?.Font_Weight}
+          value={Font_Weight}
         >
           <div className="py-[12px]">
             <Slider
-              defaultValue={[My_Component?.Font_Weight || 0]}
+              defaultValue={[Font_Weight || 0]}
               max={1000}
               step={1}
-              value={[My_Component?.Font_Weight || 0]}
+              value={[Font_Weight || 0]}
               className="w-full bg-white"
               onValueChange={Handle_Weight}
             />
@@ -270,14 +334,14 @@ const Text_Toolbox = () => {
         <Toolbox
           heading="Select Line Height"
           handleChange={(e: any) => Handle_Line_Height(e.target.value)}
-          value={My_Component?.Line_Height}
+          value={Line_Height || 0}
         >
           <div className="py-[12px]">
             <Slider
-              defaultValue={[My_Component?.Line_Height || 0]}
+              defaultValue={[Line_Height || 0]}
               max={100}
               step={1}
-              value={[My_Component?.Line_Height || 0]}
+              value={[Line_Height || 0]}
               className="w-full bg-white"
               onValueChange={Handle_Line_Height}
             />
@@ -287,14 +351,14 @@ const Text_Toolbox = () => {
         <Toolbox
           heading="Select Letter Spacing"
           handleChange={(e: any) => Handle_Letter_Spacing(e.target.value)}
-          value={My_Component?.Letter_Spacing}
+          value={Letter_Spacing || 0}
         >
           <div className="py-[12px]">
             <Slider
-              defaultValue={[My_Component?.Letter_Spacing || 0]}
+              defaultValue={[Letter_Spacing || 0]}
               max={100}
               step={1}
-              value={[My_Component?.Letter_Spacing || 0]}
+              value={[Letter_Spacing || 0]}
               className="w-full bg-white"
               onValueChange={Handle_Letter_Spacing}
             />
@@ -303,7 +367,7 @@ const Text_Toolbox = () => {
       </div>
       {/* Delete Text */}
     </div>
-  );
+  ) : null;
 };
 
 export const Toolbox = ({

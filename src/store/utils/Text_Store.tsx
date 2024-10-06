@@ -17,6 +17,8 @@ interface Text_Component {
   Letter_Spacing?: number;
 
   Link?: string;
+
+  Classname?: string;
 }
 
 interface Text_Store {
@@ -39,6 +41,8 @@ interface Text_Store {
   Set_Letter_Spacing: (Id: string, Letter_Spacing: number) => void;
 
   Set_Link: (Id: string, Set_Link: string) => void;
+
+  Set_Classname: (Id: string, Classname: string) => void;
 
   Selected_Id: string | null;
   Set_Selected_Id: (Id: string | null) => void;
@@ -138,6 +142,14 @@ export const use_Text_Store = create<Text_Store>((set) => ({
     set((state) => ({
       Text_Components: state.Text_Components.map((component) =>
         component.Id === Id ? { ...component, Link } : component
+      ),
+    }));
+  },
+
+  Set_Classname: (Id, Classname) => {
+    set((state) => ({
+      Text_Components: state.Text_Components.map((component) =>
+        component.Id === Id ? { ...component, Classname } : component
       ),
     }));
   },

@@ -9,7 +9,7 @@ interface Icon_Component {
   Icon_Color?: string;
   Icon_Bg_Color?: string;
 
-  Icon_Border_width?: number;
+  Icon_Border_Width?: number;
   Icon_Border_Color?: string;
 
   Hover_Icon_Color?: string;
@@ -99,10 +99,10 @@ export const use_Icon_Store = create<Icon_Store>((set) => ({
     }));
   },
 
-  Set_Icon_Border_Width: (Id, Icon_Border_width) => {
+  Set_Icon_Border_Width: (Id, Icon_Border_Width) => {
     set((state) => ({
       Icon_Components: state.Icon_Components.map((component) =>
-        component.Id === Id ? { ...component, Icon_Border_width } : component
+        component.Id === Id ? { ...component, Icon_Border_Width } : component
       ),
     }));
   },

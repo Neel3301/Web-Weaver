@@ -1,11 +1,8 @@
 "use client";
-import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 import { use_Text_Store } from "@/store/utils/Text_Store";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
-import { Children, useState } from "react";
+import { useEffect, useState } from "react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,6 +27,8 @@ interface Text_Props {
   letterSpacing?: number;
 
   link?: string;
+
+  classname?: string;
 }
 
 const Text = ({
@@ -50,29 +49,17 @@ const Text = ({
   letterSpacing,
 
   link = "",
+
+  classname = "",
 }: Text_Props) => {
-  // text stote
-  const [
-    Text_Component,
-    Add_Text_Component,
-    Set_Selected_Id,
-    Set_Content,
-    Selected_Id,
-  ] = use_Text_Store((s) => [
-    s.Text_Components,
-    s.Add_Text_Component,
-    s.Set_Selected_Id,
-    s.Set_Content,
-    s.Selected_Id,
-  ]);
+  // Import From Text Store
+  const Text_Components = use_Text_Store((s) => s.Text_Components);
+  const Add_Text_Component = use_Text_Store((s) => s.Add_Text_Component);
+  const Set_Selected_Id = use_Text_Store((s) => s.Set_Selected_Id);
+  const Set_Content = use_Text_Store((s) => s.Set_Content);
 
-  // text toolbox
-  const [Text_Toolbox_On_Open, Text_Toolbox_Is_Open] = use_Toolbox_Store(
-    (s) => [s.Text_Toolbox_On_Open, s.Text_Toolbox_Is_Open]
-  );
-
-  // adding element
-  const Existing_Component = Text_Component.find((x) => x.Id === cId);
+  // Adding Component Logic
+  const Existing_Component = Text_Components.find((x) => x.Id === cId);
   const [initialized, setInitialized] = useState(false);
   if (!Existing_Component && !initialized) {
     Add_Text_Component({
@@ -88,38 +75,52 @@ const Text = ({
       Line_Height: lineHeight,
       Letter_Spacing: letterSpacing,
       Link: link,
+      Classname: classname,
     });
     Set_Content(cId, children);
     setInitialized(true);
   }
 
-  // finding component
-  const My_Component = Text_Component.find((x) => x.Id === cId);
+  // Finding Component
+  const My_Component = Text_Components.find((x) => x.Id === cId);
 
-  // handle click
+  // Handle Click
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // window.parent.postMessage(
-    //   { action: "openSidebar", id: cId, My_Component: My_Component },
-    //   "*"
-    // );
     e.stopPropagation();
-    Text_Toolbox_On_Open();
     Set_Selected_Id(cId);
+
+    // Sending Data To Toolbox
+    window.parent.postMessage(
+      {
+        type: "SET_TEXT_SELECTED_ID",
+        id: cId,
+        attributes: {
+          fontStyle: My_Component?.Font_Style,
+          fontSize: My_Component?.Font_Size,
+          fontWeight: My_Component?.Font_Weight,
+          textColor: My_Component?.Text_Color,
+          textAlignment: My_Component?.Text_Alignment,
+          textUnderline: My_Component?.Text_Underline,
+          textItalic: My_Component?.Text_Italic,
+          lineHeight: My_Component?.Line_Height,
+          letterSpacing: My_Component?.Letter_Spacing,
+          link: My_Component?.Link,
+        },
+      },
+      "*"
+    );
   };
 
-  // handle Input
+  // Handle Input
   const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
     Set_Content(cId, e.currentTarget.textContent || "");
   };
 
-  // setting environment
-  let env = "development";
-  const path = usePathname();
-  if (path.startsWith("/web/")) {
-    env = "production";
-  }
+  // Setting Env
+  const env = "development";
+  // ...
 
-  // selecting Element
+  // Selecting Element
   const Element =
     tag == Link || "a" || link != ""
       ? env == "development"
@@ -127,14 +128,76 @@ const Text = ({
         : Link
       : tag;
 
+  // Import From Text Store
+  const Set_Font_Style = use_Text_Store((s) => s.Set_Font_Style);
+  const Set_Font_Size = use_Text_Store((s) => s.Set_Font_Size);
+  const Set_Font_Weight = use_Text_Store((s) => s.Set_Font_Weight);
+  const Set_Text_Color = use_Text_Store((s) => s.Set_Text_Color);
+  const Set_Text_Alignment = use_Text_Store((s) => s.Set_Text_Alignment);
+  const Set_Text_Underline = use_Text_Store((s) => s.Set_Text_Underline);
+  const Set_Text_Italic = use_Text_Store((s) => s.Set_Text_Italic);
+  const Set_Line_Height = use_Text_Store((s) => s.Set_Line_Height);
+  const Set_Letter_Spacing = use_Text_Store((s) => s.Set_Letter_Spacing);
+  const Set_Link = use_Text_Store((s) => s.Set_Link);
+
+  const Selected_Id = use_Text_Store((s) => s.Selected_Id);
+
+  // Handling Changes From Toolbox
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      const {
+        type,
+        id,
+        fontStyle,
+        fontSize,
+        fontWeight,
+        textColor,
+        textAlignment,
+        textUnderline,
+        textItalic,
+        lineHeight,
+        letterSpacing,
+        link,
+      } = event.data;
+
+      if (type === "UPDATE_TEXT_COMPONENT_FONT_STYLE") {
+        Set_Font_Style(Selected_Id!, fontStyle);
+      } else if (type === "UPDATE_TEXT_COMPONENT_FONT_SIZE") {
+        Set_Font_Size(Selected_Id!, fontSize);
+      } else if (type === "UPDATE_TEXT_COMPONENT_FONT_WEIGHT") {
+        Set_Font_Weight(Selected_Id!, fontWeight);
+      } else if (type === "UPDATE_TEXT_COMPONENT_TEXT_COLOR") {
+        Set_Text_Color(Selected_Id!, textColor);
+      } else if (type === "UPDATE_TEXT_COMPONENT_TEXT_ALIGNMENT") {
+        Set_Text_Alignment(Selected_Id!, textAlignment);
+      } else if (type === "UPDATE_TEXT_COMPONENT_TEXT_UNDERLINE") {
+        Set_Text_Underline(Selected_Id!, textUnderline);
+      } else if (type === "UPDATE_TEXT_COMPONENT_TEXT_ITALIC") {
+        Set_Text_Italic(Selected_Id!, textItalic);
+      } else if (type === "UPDATE_TEXT_COMPONENT_LINE_HEIGHT") {
+        Set_Line_Height(Selected_Id!, lineHeight);
+      } else if (type === "UPDATE_TEXT_COMPONENT_LETTER_SPACING") {
+        Set_Letter_Spacing(Selected_Id!, letterSpacing);
+      } else if (type === "UPDATE_TEXT_COMPONENT_LINK") {
+        Set_Link(Selected_Id!, link);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, [Text_Components, Selected_Id]);
+
   return (
     <Element
       id={cId}
-      onClick={env == "development" ? handleClick : () => {}}
-      onBlur={env == "development" ? handleInput : () => {}}
-      contentEditable={env == "development" ? true : false}
+      onClick={handleClick}
+      onBlur={handleInput}
+      contentEditable={true}
       spellCheck={false}
-      className={`${My_Component?.Font_Style} z-50 h-fit w-fit ${env == "development" ? "cursor-text" : "cursor-default"}`}
+      className={`${My_Component?.Font_Style} ${classname} z-50 h-fit w-fit ${"cursor-text"}`}
       href={`${link}`}
       style={{
         fontSize: `${My_Component?.Font_Size}px`,
@@ -148,9 +211,8 @@ const Text = ({
         lineHeight: `${My_Component?.Line_Height === 0 ? `normal` : My_Component?.Line_Height}px`,
         letterSpacing: `${My_Component?.Letter_Spacing}px`,
       }}
-    >
-      {children}
-    </Element>
+      dangerouslySetInnerHTML={{ __html: My_Component?.Content || "" }}
+    />
   );
 };
 
