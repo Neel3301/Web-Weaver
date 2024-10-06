@@ -94,7 +94,7 @@ const Icon = ({
   const My_Component = Icon_Components.find((x) => x.Id === cId);
 
   // Handle Click
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     Icon_Toolbox_On_Open();
     Set_Selected_Id(cId);
