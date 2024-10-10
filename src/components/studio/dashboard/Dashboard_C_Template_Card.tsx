@@ -5,13 +5,15 @@ import Link from "next/link";
 
 interface Dashboard_C_Template_Card_Props {
   img: string;
+  id: string | number;
 }
 const Dashboard_C_Template_Card = ({
   img,
+  id,
 }: Dashboard_C_Template_Card_Props) => {
   return (
     // <Link href={`${process.env.DOMAIN}/dashboard/1/editor/1`}>
-    <Link href={`/dashboard/1/editor/1`}>
+    <Link href={`/dashboard/1/editor/${id}`}>
       <div className="cursor-pointer p-3">
         <div className="relative h-[200px] w-[350px]">
           <Image src={img} fill alt="t1" objectFit="cover" />

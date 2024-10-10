@@ -1,35 +1,140 @@
-import templateOne from "@/../public/template-1-example-long.png";
-import templateTwo from "@/../public/template-2-example-long.jpg";
-import templateThree from "@/../public/template-3-example-long.png";
-import templateFour from "@/../public/template-4-example-long.png";
-
 export const templates = [
   {
-    _id: 1,
-    img: templateOne,
+    id: 1,
+    img: "/Template_Thumbnails/template-1-example-long.png",
+    title: "Personal Portfolio Landing Page Website",
+    type: "demo",
+    description:
+      "Please meet with Snap Master landing page concept, Snap Master is an exploration design for a photographer portfolio with a modern approach",
+  },
+  {
+    id: 2,
+    img: "/Template_Thumbnails/template-2-example-long.jpg",
+    title: "Personal Portfolio Landing Page Website",
+    type: "demo",
+    description:
+      "Please meet with Snap Master landing page concept, Snap Master is an exploration design for a photographer portfolio with a modern approach",
+  },
+  {
+    id: 3,
+    img: "/Template_Thumbnails/template-3-example-long.png",
+    title: "Personal Portfolio Landing Page Website",
+    type: "demo",
+    description:
+      "Please meet with Snap Master landing page concept, Snap Master is an exploration design for a photographer portfolio with a modern approach",
+  },
+  {
+    id: 4,
+    img: "/Template_Thumbnails/template-4-example-long.png",
+    type: "demo",
     title: "Personal Portfolio Landing Page Website",
     description:
       "Please meet with Snap Master landing page concept, Snap Master is an exploration design for a photographer portfolio with a modern approach",
   },
   {
-    _id: 2,
-    img: templateTwo,
-    title: "Personal Portfolio Landing Page Website",
-    description:
-      "Please meet with Snap Master landing page concept, Snap Master is an exploration design for a photographer portfolio with a modern approach",
+    id: 1,
+    img: "/Template_Thumbnails/t1.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
   },
   {
-    _id: 3,
-    img: templateThree,
-    title: "Personal Portfolio Landing Page Website",
-    description:
-      "Please meet with Snap Master landing page concept, Snap Master is an exploration design for a photographer portfolio with a modern approach",
+    id: 2,
+    img: "/Template_Thumbnails/t2.png",
+    title: "",
+    type: "E-Commerce",
+    description: "",
   },
   {
-    _id: 4,
-    img: templateFour,
-    title: "Personal Portfolio Landing Page Website",
-    description:
-      "Please meet with Snap Master landing page concept, Snap Master is an exploration design for a photographer portfolio with a modern approach",
+    id: 3,
+    img: "/Template_Thumbnails/t3.png",
+    title: "",
+    type: "Portfolio",
+    description: "",
+  },
+  {
+    id: 4,
+    img: "/Template_Thumbnails/t4.png",
+    title: "",
+    type: "E-Commerce",
+    description: "",
+  },
+  {
+    id: 5,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
+  },
+
+  {
+    id: 6,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
+  },
+  {
+    id: 7,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
+  },
+  {
+    id: 8,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
+  },
+  {
+    id: 9,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
+  },
+  {
+    id: 10,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
+  },
+  {
+    id: 11,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
+  },
+  {
+    id: 12,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
+  },
+  {
+    id: 13,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
+  },
+  {
+    id: 14,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
+  },
+  {
+    id: 15,
+    img: "/Template_Thumbnails/t5.png",
+    title: "",
+    type: "Social-Media",
+    description: "",
   },
 ];

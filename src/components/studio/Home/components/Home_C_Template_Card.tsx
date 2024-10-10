@@ -5,7 +5,7 @@ import React from "react";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/ThreeDCard";
 
 interface Template_Card_Props {
-  img: StaticImageData;
+  img: string;
   title: string;
   description: string;
 }
@@ -22,6 +22,8 @@ const Home_C_Template_Card = ({
           <div className="relative">
             <Image
               src={img}
+              width={700}
+              height={200}
               className="h-96 rounded-xl object-cover object-top group-hover/card:shadow-xl"
               alt="thumbnail"
             />

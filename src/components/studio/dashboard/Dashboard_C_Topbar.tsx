@@ -1,23 +1,23 @@
 import { Input } from "@/components/ui/input";
-import {
-  Facebook,
-  Github,
-  Grip,
-  Instagram,
-  LayoutPanelLeft,
-  Linkedin,
-  SearchIcon,
-  Twitter,
-} from "lucide-react";
+import { use_Dashboard_Store } from "@/store/studio/Dashboard_Store";
+import { Github, Linkedin, SearchIcon, Twitter } from "lucide-react";
 import Link from "next/link";
 
 const Dashboard_C_Topbar = () => {
+  // Import From Dashboard Store
+  const Set_SearchQuery = use_Dashboard_Store((s) => s.Set_SearchQuery);
+  const SearchQuery = use_Dashboard_Store((s) => s.SearchQuery);
   return (
     <div className="flex h-full w-full items-center justify-between gap-[24px] border-b-[1px] border-neutral-700 px-6">
       {/* <LayoutPanelLeft size={32} /> */}
       <div className="flex w-[480px] items-center overflow-hidden rounded-[8px] border-[2px] border-neutral-700 bg-black px-[12px] max-lg:w-full">
         <SearchIcon size={24} />
-        <Input className="border-none" placeholder="Search Template..." />
+        <Input
+          className="border-none"
+          placeholder="Search Template..."
+          value={SearchQuery}
+          onChange={(e) => Set_SearchQuery(e.target.value)}
+        />
       </div>
 
       <div className="flex items-center justify-center gap-[24px] max-lg:hidden">

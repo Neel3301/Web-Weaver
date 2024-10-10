@@ -24,15 +24,17 @@ const Home_Template = () => {
         </div>
 
         <div className="m-auto grid gap-4 sm:grid-cols-2 lg:w-[48rem]">
-          {templates.map(({ _id, img, title, description }) => (
-            <Link href="/dashboard/1" key={_id}>
-              <Home_C_Template_Card
-                img={img}
-                title={title}
-                description={description}
-              />
-            </Link>
-          ))}
+          {templates
+            .filter((x) => x.type === "demo")
+            .map(({ id, img, title, description }) => (
+              <Link href="/dashboard/1" key={id}>
+                <Home_C_Template_Card
+                  img={img}
+                  title={title}
+                  description={description}
+                />
+              </Link>
+            ))}
         </div>
 
         <div className="flex flex-col items-center justify-center gap-2 pt-8 sm:flex-row">

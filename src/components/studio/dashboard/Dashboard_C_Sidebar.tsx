@@ -30,6 +30,7 @@ import Link from "next/link";
 import Dashboard_C_Link_Hover from "./Dashboard_C_Link_Hover";
 
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
+import { use_Dashboard_Store } from "@/store/studio/Dashboard_Store";
 
 const Dashboard_C_Sidebar = () => {
   // Using Toolbox Store For Handling Sidebar
@@ -103,73 +104,61 @@ const Dashboard_C_Sidebar = () => {
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={HomeIcon}
                 text="Dashboard"
-                href=""
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={Hexagon}
-                text="Your&nbsp;Template"
-                href=""
+                text="Your-Template"
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={ShoppingCartIcon}
                 text="E-Commerce"
-                href=""
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={HeartIcon}
-                text="Health&nbsp;Care"
-                href=""
+                text="Health-Care"
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={Leaf}
-                text="Social&nbsp;Media"
-                href=""
+                text="Social-Media"
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={Gem}
                 text="Portfolio"
-                href=""
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={Plane}
                 text="Travelling"
-                href=""
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={Dumbbell}
                 text="Gym"
-                href=""
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={Camera}
                 text="Photography"
-                href=""
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={Pickaxe}
                 text="Construction"
-                href=""
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={Layers3}
                 text="Service"
-                href=""
               />
               <My_Link
                 Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
                 icon={BookA}
                 text="Education"
-                href=""
               />
             </div>
           </div>
@@ -241,7 +230,7 @@ const Dashboard_C_Sidebar = () => {
           href={""}
           className={`text-[16px] font-semibold text-neutral-300 ${Dashboard_Sidebar_Is_Open && "hidden"}`}
         >
-          <Dashboard_C_Link_Hover content="Manage&nbsp;Account" />
+          <Dashboard_C_Link_Hover content="Manage-Account" />
         </Link>
       </div>
     </div>
@@ -265,24 +254,37 @@ const Sidebar_Section_Title = ({
 };
 
 const My_Link = ({
-  href,
   text,
   icon: Icon,
   Dashboard_Sidebar_Is_Open,
+  href,
 }: {
-  href: string;
   text: string;
   icon: LucideIcon;
   Dashboard_Sidebar_Is_Open?: boolean;
+  href?: string;
 }) => {
+  const Element = href ? Link : "p";
+
+  // Import From Dashboard Store
+  const ActiveMenu = use_Dashboard_Store((s) => s.ActiveMenu);
+  const Set_ActiveMenu = use_Dashboard_Store((s) => s.Set_ActiveMenu);
+  const Set_SearchQuery = use_Dashboard_Store((s) => s.Set_SearchQuery);
+
   return (
     <div className={`group flex items-center justify-start gap-[18px]`}>
       <div className="cursor-pointer">
-        <Icon className="group-hover:text-sky-400" />
+        <Icon
+          className={`group-hover:text-sky-400 ${ActiveMenu === text && "text-sky-500"}`}
+        />
       </div>
       <Link
-        href={href}
-        className={`text-[16px] ${Dashboard_Sidebar_Is_Open && "hidden"} text-white group-hover:text-sky-400`}
+        href={href || ""}
+        onClick={() => {
+          Set_ActiveMenu(text);
+          Set_SearchQuery("");
+        }}
+        className={`text-[16px] ${Dashboard_Sidebar_Is_Open && "hidden"} ${ActiveMenu === text && "text-sky-500"} group-hover:text-sky-400`}
       >
         <Dashboard_C_Link_Hover content={text} />
       </Link>
