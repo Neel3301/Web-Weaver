@@ -13,10 +13,7 @@ const Editor_S_Mockup = () => {
         className={`flex h-full flex-col overflow-hidden rounded-[6px] transition-all duration-300 ${(Mockup == "Desktop" && "w-full") || (Mockup == "Tablet" && "w-[736px]") || (Mockup == "Mobile" && "w-[350px]")} items-center justify-center`}
       >
         {/* iframe  */}
-        <iframe
-          src={`${process.env.DOMAIN}/web/template_1`}
-          className="h-full w-full"
-        ></iframe>
+        <iframe src={`/web/template_1`} className="h-full w-full"></iframe>
       </div>
     </div>
   );
