@@ -53,7 +53,7 @@ interface Btn_Props {
 
 const Btn = ({
   cId,
-  children = "",
+  children = "text",
   tag = "span",
 
   fontStyle = poppins.className,

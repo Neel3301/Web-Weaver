@@ -755,38 +755,26 @@ const Template_1 = () => {
             width={160}
           />
           <Div cId="T1-footer-socials" classname="flex !w-fit">
-            <Btn
+            <Icon
               cId="facebook"
               icon="Facebook"
               link="https://www.facebook.com/"
-              textColor="#000000"
-              bgColor="transparent"
-              borderColor="transparent"
-              hoverBorderColor="transparent"
-              hoverBgColor="#F5FCFF"
-              hoverTextColor="#5E3BEE"
+              iconColor="#000000"
+              hoverIconColor="#5E3BEE"
             />
-            <Btn
+            <Icon
               cId="linkedin"
               icon="Linkedin"
               link="https://www.linkedin.com/"
-              textColor="#000000"
-              bgColor="transparent"
-              borderColor="transparent"
-              hoverBorderColor="transparent"
-              hoverBgColor="#F5FCFF"
-              hoverTextColor="#5E3BEE"
+              iconColor="#000000"
+              hoverIconColor="#5E3BEE"
             />
-            <Btn
+            <Icon
               cId="twitter"
               icon="Twitter"
               link="https://www.x.com/"
-              textColor="#000000"
-              bgColor="transparent"
-              borderColor="transparent"
-              hoverBorderColor="transparent"
-              hoverBgColor="#F5FCFF"
-              hoverTextColor="#5E3BEE"
+              iconColor="#000000"
+              hoverIconColor="#5E3BEE"
             />
           </Div>
         </Div>
