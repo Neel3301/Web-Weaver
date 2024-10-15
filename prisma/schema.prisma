@@ -14,14 +14,14 @@ datasource db {
 }
 
 model User {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   firstName   String 
   lastName    String?
   imageUrl    String?
-  email       String  @unique
-  clerkId     String @unique  
-  createdAt   DateTime @default(now())     
-  updatedAt   DateTime @updatedAt          
+  email       String    @unique
+  clerkId     String    @unique  
+  createdAt   DateTime  @default(now())     
+  updatedAt   DateTime  @updatedAt          
 }
 
 
@@ -35,7 +35,7 @@ model Website {
   images      Image[]
   divs        Div[]
   icons       Icon[]
-  templateId  String
+  templateId  Json
   createdAt   DateTime @default(now())     
   updatedAt   DateTime @updatedAt   
 } 
