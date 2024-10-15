@@ -1,5 +1,7 @@
 "use client";
 
+import Loading from "@/app/loading";
+import NotFound from "@/app/not-found";
 import Dashboard_C_Sidebar from "@/components/studio/dashboard/Dashboard_C_Sidebar";
 import Dashboard_C_Topbar from "@/components/studio/dashboard/Dashboard_C_Topbar";
 import Dashboard_S_Template from "@/components/studio/dashboard/Dashboard_S_Template";
@@ -8,12 +10,44 @@ import ShootingStars from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
 
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Dashboard_Layout() {
   const Dashboard_Sidebar_Is_Open = use_Toolbox_Store(
     (s) => s.Dashboard_Sidebar_Is_Open
   );
 
+  const params = useParams();
+  const [isVerifiedUser, setIsVerifiedUser] = useState<undefined | boolean>(
+    undefined
+  );
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const res = await fetch(`/api/user/${params.userId}`, {
+          method: "GET",
+        });
+        setIsVerifiedUser(res.ok);
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+        setIsVerifiedUser(false);
+      }
+    };
+    if (params.userId) {
+      checkUser();
+    }
+    checkUser();
+  }, [params.userId]);
+
+  if (isVerifiedUser === undefined) {
+    return <Loading />;
+  }
+
+  if (!isVerifiedUser) {
+    return <NotFound />;
+  }
   return (
     <div className="flex h-screen w-screen justify-center bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-[#121212] via-black to-black">
       {/* Shooting star Bg  */}

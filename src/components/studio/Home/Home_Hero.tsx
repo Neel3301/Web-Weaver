@@ -29,10 +29,10 @@ const Home_Hero = () => {
           clicks.
         </p>
         <div className="flex gap-2">
-          <Link href={"/dashboard/1"}>
+          <Link href={"/v2"} prefetch>
             <Home_C_Gradient_Btn text="Get Started" />
           </Link>
-          <Link href={"/dashboard/1"}>
+          <Link href={""}>
             <Home_C_Outline_Btn text="Watch Demo" />
           </Link>
         </div>

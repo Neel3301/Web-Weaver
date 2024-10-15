@@ -1,3 +1,4 @@
+"use client";
 import { use_Mockup_Store } from "@/store/studio/Mockup_Store";
 import {
   BotMessageSquare,
@@ -7,6 +8,9 @@ import {
   Tablet,
 } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import Editor_C_Publish_Website_Dialog from "./Editor_C_Publish_Website_Dialog";
+import { text } from "stream/consumers";
 
 const Editor_C_Topbar = () => {
   // using mockup store
@@ -18,7 +22,7 @@ const Editor_C_Topbar = () => {
   return (
     <div className="flex h-full w-full items-center justify-between border-b-[1px] border-neutral-700 p-6">
       {/* Title */}
-      <Link href={`http://localhost:3000/dashboard/1`}>
+      <Link href={`/v2`}>
         <div className="flex items-center justify-center gap-[8px]">
           <Flame size={32} />
           {/* bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 */}
@@ -60,9 +64,7 @@ const Editor_C_Topbar = () => {
           <BotMessageSquare />
           <Link href={""}>Support</Link>
         </div>
-        <button className="inline-flex animate-shimmer cursor-pointer items-center justify-center rounded-[8px] border border-neutral-700 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-[24px] py-[8px] font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-          Publish Website
-        </button>
+        <Editor_C_Publish_Website_Dialog />
       </div>
     </div>
   );

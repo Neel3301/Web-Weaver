@@ -27,7 +27,7 @@ const Home_Template = () => {
           {templates
             .filter((x) => x.type === "demo")
             .map(({ id, img, title, description }) => (
-              <Link href="/dashboard/1" key={id}>
+              <Link href="/v2" prefetch key={id}>
                 <Home_C_Template_Card
                   img={img}
                   title={title}
@@ -39,7 +39,7 @@ const Home_Template = () => {
 
         <div className="flex flex-col items-center justify-center gap-2 pt-8 sm:flex-row">
           <span className="text-gray-100">Check out all templates</span>
-          <Link href="/dashboard/1">
+          <Link href="/v2" prefetch>
             <div className="flex items-center justify-center gap-2 text-center text-blue-500 underline underline-offset-2">
               <HiOutlineArrowRight />
               View Templates

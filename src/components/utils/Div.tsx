@@ -1,7 +1,7 @@
 "use client";
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 import { use_Div_Store } from "@/store/utils/Div_Store";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // Interface
@@ -84,7 +84,8 @@ const Div = ({
   };
 
   // Setting Env
-  let env = "development";
+  const searchParams = useSearchParams();
+  const env = searchParams.get("editor") ? "development" : "production";
   // ...
 
   // Handling Hover
@@ -148,10 +149,12 @@ const Div = ({
   return (
     <div
       id={cId}
-      onClick={handleClick}
-      onMouseEnter={(e) => handleMouseEnter(cId, e)}
-      onMouseLeave={handleMouseLeave}
-      className={`${classname} ${hoveredId === cId ? "border-[3px]" : "border-[0px]"} border-dotted border-transparent`}
+      onClick={env === "development" ? handleClick : () => {}}
+      onMouseEnter={
+        env === "development" ? (e) => handleMouseEnter(cId, e) : () => {}
+      }
+      onMouseLeave={env === "development" ? handleMouseLeave : () => {}}
+      className={`${classname} ${env === "development" && hoveredId === cId ? "border-[3px]" : "border-[0px]"} border-[3px] border-dotted border-transparent`}
       style={{
         height: `${typeof My_Component?.Height == "number" ? `${My_Component?.Height}px` : My_Component?.Height}`,
         width: `${typeof My_Component?.Width == "number" ? `${My_Component?.Width}px` : My_Component?.Width}`,

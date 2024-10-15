@@ -1,7 +1,7 @@
 "use client";
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 import { use_Image_Store } from "@/store/utils/Image_Store";
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // Interface
@@ -62,8 +62,10 @@ const Image = ({
   // Finding Component
   const My_Component = Image_Components.find((x) => x.Id === cId);
 
-  // Setting Environment
-  let env = "development";
+  // Setting Env
+  const searchParams = useSearchParams();
+  const env = searchParams.get("editor") ? "development" : "production";
+  // ...
 
   // Handle Click
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -128,6 +130,7 @@ const Image = ({
 
       if (type === "UPDATE_IMAGE_COMPONENT_IMG") {
         Set_Img(Selected_Id!, img);
+        Set_Img_Url(Selected_Id!, "#");
       } else if (type === "UPDATE_IMAGE_COMPONENT_IMG_URL") {
         Set_Img_Url(Selected_Id!, imgUrl);
       } else if (type === "UPDATE_IMAGE_COMPONENT_DISPLAY_IMG") {
@@ -173,8 +176,14 @@ const Image = ({
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={My_Component?.Img}
-        alt={img}
+        src={
+          env === "development"
+            ? My_Component?.Img
+            : My_Component?.Img_Url === ""
+              ? My_Component?.Img
+              : My_Component?.Img_Url
+        }
+        alt={cId}
         id={cId}
         className={`${classname} h-full w-full`}
         style={{

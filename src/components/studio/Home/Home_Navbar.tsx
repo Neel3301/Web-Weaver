@@ -4,6 +4,7 @@ import { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 import Link from "next/link";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 const Home_Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -59,12 +60,16 @@ const Home_Navbar = () => {
             >
               Contact Us
             </Link>
-            <Link
-              className="transition duration-200 hover:text-gray-200"
-              href="#sign-up"
-            >
-              Sign Up
-            </Link>
+            <SignedOut>
+              <SignInButton
+                forceRedirectUrl={"/v2"}
+                signUpForceRedirectUrl={"/v2"}
+                mode="modal"
+              />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
       </nav>

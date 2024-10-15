@@ -37,8 +37,8 @@ const Image_Toolbox = () => {
   const [Object, Set_Object] = useState<string>();
   const [Display_Img, Set_Display_Img] = useState<string>();
 
-  const Handle_Border_Radius = (e: any) => {
-    const value = e;
+  const Handle_Border_Radius = (value: any) => {
+    value = typeof value == "string" ? value : value["0"];
     Set_Border_Radius(value);
     sendMessageToIframe({
       type: "UPDATE_IMAGE_COMPONENT_BORDER_RADIUS",
@@ -46,8 +46,8 @@ const Image_Toolbox = () => {
       borderRadius: value,
     });
   };
-  const Handle_Height = (e: any) => {
-    const value = e;
+  const Handle_Height = (value: any) => {
+    value = typeof value == "string" ? value : value["0"];
     Set_Height(value);
     sendMessageToIframe({
       type: "UPDATE_IMAGE_COMPONENT_HEIGHT",
@@ -55,8 +55,8 @@ const Image_Toolbox = () => {
       height: value,
     });
   };
-  const Handle_Width = (e: any) => {
-    const value = e;
+  const Handle_Width = (value: any) => {
+    value = typeof value == "string" ? value : value["0"];
     Set_Width(value);
     sendMessageToIframe({
       type: "UPDATE_IMAGE_COMPONENT_WIDTH",
@@ -64,8 +64,8 @@ const Image_Toolbox = () => {
       width: value,
     });
   };
-  const Handle_Max_Height = (e: any) => {
-    const value = e;
+  const Handle_Max_Height = (value: any) => {
+    value = typeof value == "string" ? value : value["0"];
     Set_Max_Height(value);
     sendMessageToIframe({
       type: "UPDATE_IMAGE_COMPONENT_MAX_HEIGHT",
@@ -73,8 +73,8 @@ const Image_Toolbox = () => {
       maxHeight: value,
     });
   };
-  const Handle_Max_Width = (e: any) => {
-    const value = e;
+  const Handle_Max_Width = (value: any) => {
+    value = typeof value == "string" ? value : value["0"];
     Set_Max_Width(value);
     sendMessageToIframe({
       type: "UPDATE_IMAGE_COMPONENT_MAX_WIDTH",
@@ -82,8 +82,8 @@ const Image_Toolbox = () => {
       maxWidth: value,
     });
   };
-  const Handle_Min_Height = (e: any) => {
-    const value = e;
+  const Handle_Min_Height = (value: any) => {
+    value = typeof value == "string" ? value : value["0"];
     Set_Min_Height(value);
     sendMessageToIframe({
       type: "UPDATE_IMAGE_COMPONENT_MIN_HEIGHT",
@@ -91,8 +91,8 @@ const Image_Toolbox = () => {
       minHeight: value,
     });
   };
-  const Handle_Min_Width = (e: any) => {
-    const value = e;
+  const Handle_Min_Width = (value: any) => {
+    value = typeof value == "string" ? value : value["0"];
     Set_Min_Width(value);
     sendMessageToIframe({
       type: "UPDATE_IMAGE_COMPONENT_MIN_WIDTH",
@@ -131,6 +131,12 @@ const Image_Toolbox = () => {
             type: "UPDATE_IMAGE_COMPONENT_IMG",
             id: Selected_Id,
             img: result,
+          });
+        } else {
+          sendMessageToIframe({
+            type: "USE_DEFAULT_IMAGE",
+            id: Selected_Id,
+            img: selectedImage,
           });
         }
       };

@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import * as LucidIcons from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 interface Icon_Props {
   cId: string;
@@ -124,7 +125,9 @@ const Icon = ({
   };
 
   // Setting Env
-  let env = "development";
+  const searchParams = useSearchParams();
+  const env = searchParams.get("editor") ? "development" : "production";
+  // ...
 
   // Setting Element
   const Element = env === "development" ? "button" : link != "" ? Link : "span";
@@ -214,7 +217,7 @@ const Icon = ({
   return (
     <Element
       id={cId}
-      onClick={handleClick}
+      onClick={env === "development" ? handleClick : () => {}}
       href={link || ""}
       // Hover Management ... Incomplete ...
       onMouseOver={() => setIsHover(false)}

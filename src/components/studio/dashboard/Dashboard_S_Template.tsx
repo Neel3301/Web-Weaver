@@ -1,6 +1,8 @@
 import Dashboard_C_Template_Card from "@/components/studio/dashboard/Dashboard_C_Template_Card";
 import { templates } from "@/constants/studio/templates";
 import { use_Dashboard_Store } from "@/store/studio/Dashboard_Store";
+import Dashboard_S_User_Templates from "./Dashboard_S_User_Templates";
+import Dashboard_C_Section_Heading from "./Dashboard_C_Section_Heading";
 
 const Dashboard_S_Template = ({
   params,
@@ -15,7 +17,7 @@ const Dashboard_S_Template = ({
     <>
       {SearchQuery !== "" ? (
         <div className="h-full w-full overflow-y-scroll p-6">
-          <Section_Heading
+          <Dashboard_C_Section_Heading
             heading={`Showing result of : ${SearchQuery}`}
             subHeading="Searching..."
           />
@@ -40,14 +42,14 @@ const Dashboard_S_Template = ({
 
           {ActiveMenu === "Dashboard" ? (
             <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-              <Section_Heading
-                heading="Most Use E-Commerce Templates"
+              <Dashboard_C_Section_Heading
+                heading="Most Use Portfolio Templates"
                 subHeading="Trending"
               />
 
               <div className="mb-[24px] mt-[24px] flex items-center justify-start gap-[34px] overflow-x-scroll">
                 {templates
-                  .filter((x) => x.type === "E-Commerce")
+                  .filter((x) => x.type === "Portfolio")
                   .map((y) => (
                     <Dashboard_C_Template_Card
                       id={y.id}
@@ -57,7 +59,7 @@ const Dashboard_S_Template = ({
                   ))}
               </div>
 
-              <Section_Heading
+              <Dashboard_C_Section_Heading
                 heading="Social Media Templates"
                 subHeading="Peoples Favourite"
               />
@@ -73,13 +75,13 @@ const Dashboard_S_Template = ({
                   ))}
               </div>
 
-              <Section_Heading
-                heading="Portfolio Templates"
+              <Dashboard_C_Section_Heading
+                heading="Best E-Commerce Templates"
                 subHeading="Web-Weaver Hand Pick"
               />
               <div className="mb-[24px] mt-[24px] flex items-center justify-start gap-[34px] overflow-x-scroll">
                 {templates
-                  .filter((x) => x.type === "Portfolio")
+                  .filter((x) => x.type === "E-Commerce")
                   .map((y) => (
                     <Dashboard_C_Template_Card
                       id={y.id}
@@ -91,31 +93,35 @@ const Dashboard_S_Template = ({
             </div>
           ) : (
             <div>
-              {ActiveMenu === "Your-Template" &&
-                (templates.filter((x) => x.type === "Your-Template").length ===
-                0 ? (
-                  <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
-                  </div>
-                ) : (
-                  <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
-                      heading="Recently Edited Template"
-                      subHeading="Your Template"
-                    />
-                    <div className="mb-[24px] mt-[24px] grid grid-cols-3 gap-[34px]">
-                      {templates
-                        .filter((x) => x.type === "Your-Template")
-                        .map((y) => (
-                          <Dashboard_C_Template_Card
-                            id={y.id}
-                            key={y.id}
-                            img={y.img}
-                          />
-                        ))}
-                    </div>
-                  </div>
-                ))}
+              {/* Your - Templates  */}
+
+              {ActiveMenu === "Your-Template" && (
+                // (templates.filter((x) => x.type === "Your-Template").length ===
+                // 0 ? (
+                //   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
+                //     <Section_Heading heading="No Templates Found" />
+                //   </div>
+                // ) : (
+                //   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
+                //     <Section_Heading
+                //       heading="Recently Edited Template"
+                //       subHeading="Your Template"
+                //     />
+                //     <div className="mb-[24px] mt-[24px] grid grid-cols-3 gap-[34px]">
+                //       {templates
+                //         .filter((x) => x.type === "Your-Template")
+                //         .map((y) => (
+                //           <Dashboard_C_Template_Card
+                //             id={y.id}
+                //             key={y.id}
+                //             img={y.img}
+                //           />
+                //         ))}
+                //     </div>
+                //   </div>
+                // ))
+                <Dashboard_S_User_Templates />
+              )}
 
               {/* E-Commerce */}
 
@@ -123,11 +129,11 @@ const Dashboard_S_Template = ({
                 (templates.filter((x) => x.type === "E-Commerce").length ===
                 0 ? (
                   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
+                    <Dashboard_C_Section_Heading heading="No Templates Found" />
                   </div>
                 ) : (
                   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
+                    <Dashboard_C_Section_Heading
                       heading="Best E-Commerce Templates For You"
                       subHeading="E-Commerce"
                     />
@@ -151,11 +157,11 @@ const Dashboard_S_Template = ({
                 (templates.filter((x) => x.type === "Health-Care").length ===
                 0 ? (
                   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
+                    <Dashboard_C_Section_Heading heading="No Templates Found" />
                   </div>
                 ) : (
                   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
+                    <Dashboard_C_Section_Heading
                       heading="Best Health Care Templates For You"
                       subHeading="Health Care"
                     />
@@ -179,11 +185,11 @@ const Dashboard_S_Template = ({
                 (templates.filter((x) => x.type === "Social-Media").length ===
                 0 ? (
                   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
+                    <Dashboard_C_Section_Heading heading="No Templates Found" />
                   </div>
                 ) : (
                   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
+                    <Dashboard_C_Section_Heading
                       heading="Best Social Media Templates For You"
                       subHeading="Social Media"
                     />
@@ -207,11 +213,11 @@ const Dashboard_S_Template = ({
                 (templates.filter((x) => x.type === "Portfolio").length ===
                 0 ? (
                   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
+                    <Dashboard_C_Section_Heading heading="No Templates Found" />
                   </div>
                 ) : (
                   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
+                    <Dashboard_C_Section_Heading
                       heading="Best Portfolio Templates For You"
                       subHeading="Portfolio"
                     />
@@ -235,11 +241,11 @@ const Dashboard_S_Template = ({
                 (templates.filter((x) => x.type === "Travelling").length ===
                 0 ? (
                   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
+                    <Dashboard_C_Section_Heading heading="No Templates Found" />
                   </div>
                 ) : (
                   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
+                    <Dashboard_C_Section_Heading
                       heading="Best Travelling Templates For You"
                       subHeading="Travelling"
                     />
@@ -262,11 +268,11 @@ const Dashboard_S_Template = ({
               {ActiveMenu === "Gym" &&
                 (templates.filter((x) => x.type === "Gym").length === 0 ? (
                   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
+                    <Dashboard_C_Section_Heading heading="No Templates Found" />
                   </div>
                 ) : (
                   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
+                    <Dashboard_C_Section_Heading
                       heading="Best Gym Templates For You"
                       subHeading="Gym"
                     />
@@ -290,11 +296,11 @@ const Dashboard_S_Template = ({
                 (templates.filter((x) => x.type === "Photography").length ===
                 0 ? (
                   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
+                    <Dashboard_C_Section_Heading heading="No Templates Found" />
                   </div>
                 ) : (
                   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
+                    <Dashboard_C_Section_Heading
                       heading="Best Photography Templates For You"
                       subHeading="Photography"
                     />
@@ -318,11 +324,11 @@ const Dashboard_S_Template = ({
                 (templates.filter((x) => x.type === "Construction").length ===
                 0 ? (
                   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
+                    <Dashboard_C_Section_Heading heading="No Templates Found" />
                   </div>
                 ) : (
                   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
+                    <Dashboard_C_Section_Heading
                       heading="Best Construction Templates For You"
                       subHeading="Construction"
                     />
@@ -345,11 +351,11 @@ const Dashboard_S_Template = ({
               {ActiveMenu === "Service" &&
                 (templates.filter((x) => x.type === "Service").length === 0 ? (
                   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
+                    <Dashboard_C_Section_Heading heading="No Templates Found" />
                   </div>
                 ) : (
                   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
+                    <Dashboard_C_Section_Heading
                       heading="Best Service Templates For You"
                       subHeading="Service"
                     />
@@ -373,11 +379,11 @@ const Dashboard_S_Template = ({
                 (templates.filter((x) => x.type === "Education").length ===
                 0 ? (
                   <div className="flex h-[calc(100vh-80px)] w-full items-center justify-center overflow-y-scroll p-6">
-                    <Section_Heading heading="No Templates Found" />
+                    <Dashboard_C_Section_Heading heading="No Templates Found" />
                   </div>
                 ) : (
                   <div className="h-[calc(100vh-80px)] w-full overflow-y-scroll p-6">
-                    <Section_Heading
+                    <Dashboard_C_Section_Heading
                       heading="Best Education Templates For You"
                       subHeading="Education"
                     />
@@ -399,29 +405,6 @@ const Dashboard_S_Template = ({
         </div>
       )}
     </>
-  );
-};
-
-const Section_Heading = ({
-  subHeading,
-  heading,
-}: {
-  subHeading?: string;
-  heading: string;
-}) => {
-  return (
-    <div className="flex items-end justify-between pr-6">
-      <div className="w-fit">
-        <div className="font-semibold text-neutral-400">{subHeading}</div>
-        <div className="text-[24px] font-semibold">{heading}</div>
-        <div className="relative">
-          <div className="absolute top-0 h-[2px] w-1/2 bg-gradient-to-r from-transparent via-indigo-500 to-transparent blur-sm" />
-          <div className="absolute top-0 h-px w-full bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-          <div className="absolute top-0 h-[2px] w-full bg-gradient-to-r from-transparent via-sky-500 to-transparent blur-sm" />
-          <div className="absolute top-0 h-px w-full bg-gradient-to-r from-transparent via-sky-500 to-transparent" />
-        </div>
-      </div>
-    </div>
   );
 };
 

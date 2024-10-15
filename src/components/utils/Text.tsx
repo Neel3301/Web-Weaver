@@ -2,6 +2,7 @@
 import { use_Text_Store } from "@/store/utils/Text_Store";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const poppins = Poppins({
@@ -45,8 +46,8 @@ const Text = ({
   textUnderline = false,
   textItalic = false,
 
-  lineHeight,
-  letterSpacing,
+  lineHeight = undefined,
+  letterSpacing = undefined,
 
   link = "",
 
@@ -117,7 +118,8 @@ const Text = ({
   };
 
   // Setting Env
-  const env = "development";
+  const searchParams = useSearchParams();
+  const env = searchParams.get("editor") ? "development" : "production";
   // ...
 
   // Selecting Element
@@ -193,9 +195,9 @@ const Text = ({
   return (
     <Element
       id={cId}
-      onClick={handleClick}
-      onBlur={handleInput}
-      contentEditable={true}
+      onClick={env === "development" ? handleClick : () => {}}
+      onBlur={env === "development" ? handleInput : () => {}}
+      contentEditable={env === "development" ? true : false}
       spellCheck={false}
       className={`${My_Component?.Font_Style} ${classname} z-50 h-fit w-fit ${"cursor-text"}`}
       href={`${link}`}
@@ -212,6 +214,7 @@ const Text = ({
         letterSpacing: `${My_Component?.Letter_Spacing}px`,
       }}
       dangerouslySetInnerHTML={{ __html: My_Component?.Content || "" }}
+      // dangerouslySetInnerHTML={{ __html: env || "" }}
     />
   );
 };

@@ -13,3 +13,116 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  firstName   String 
+  lastName    String?
+  imageUrl    String?
+  email       String  @unique
+  clerkId     String @unique  
+  createdAt   DateTime @default(now())     
+  updatedAt   DateTime @updatedAt          
+}
+
+
+
+model Website {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  clerkId     String
+  website     String @unique
+  texts       Text[]
+  btns        Btn[]
+  images      Image[]
+  divs        Div[]
+  icons       Icon[]
+  templateId  String
+  createdAt   DateTime @default(now())     
+  updatedAt   DateTime @updatedAt   
+} 
+
+
+type Text {
+  Id                String
+  Content           String?
+  Font_Style        String?
+  Font_Size         Int?
+  Font_Weight       Int?
+  Text_Color        String?
+  Text_Alignment    String?
+  Text_Underline    Boolean?
+  Text_Italic       Boolean?
+  Line_Height       Int?
+  Letter_Spacing    Int?
+  Link              String?
+  Classname         String?
+}
+
+
+type Btn {
+  Id                  String
+  Content             String?
+  Font_Style          String?
+  Font_Size           Int?
+  Font_Weight         Int?
+  Text_Color          String?
+  Text_Underline      Boolean?
+  Text_Italic         Boolean?
+  Bg_Color            String?
+  Border_Width        Int?
+  Border_Color        String?
+  Pad_X               Int?
+  Pad_Y               Int?
+  Hover_Border_Color  String?
+  Hover_Bg_Color      String?
+  Hover_Text_Color    String?
+  Border_Radius_Tl    Int?
+  Border_Radius_Tr    Int?
+  Border_Radius_Bl    Int?
+  Border_Radius_Br    Int?
+  Icon                String?
+  Line_Height         Int?
+  Letter_Spacing      Int?
+  Link                String?
+  Classname           String ? 
+}
+
+type Image {
+  Id                  String
+  Img                 String?
+  Img_Url             String?
+  Display_Img         String?
+  Border_Radius       Int?
+  Height              Json
+  Width               Json
+  Max_Height          Json?
+  Max_Width           Json?
+  Min_Height          Json?
+  Min_Width           Json?
+  Object              String?
+  
+}
+type Div {
+  Id            String
+  Height        Json?   // handle int
+  Width         Json?   // handle int
+  Pad_L         Int?
+  Pad_R         Int?
+  Pad_T         Int?
+  Pad_B         Int?
+  Bg_Color      String? 
+}
+type Icon {
+  Id                          String
+  Icon                        String
+  Icon_Size                   Int?
+  Icon_Color                  String?
+  Icon_Bg_Color               String?
+  Icon_Border_Width           Int?
+  Icon_Border_Color           String?
+  Hover_Icon_Color            String?
+  Hover_Icon_Bg_Color         String?
+  Hover_Icon_Border_Color     String?
+  Pad_X                       Int?
+  Pad_Y                       Int?
+  Link                        String?
+}

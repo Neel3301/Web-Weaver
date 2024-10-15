@@ -1,6 +1,6 @@
 export const templates = [
   {
-    id: 1,
+    id: 11,
     img: "/Template_Thumbnails/template-1-example-long.png",
     title: "Personal Portfolio Landing Page Website",
     type: "demo",
@@ -8,7 +8,7 @@ export const templates = [
       "Please meet with Snap Master landing page concept, Snap Master is an exploration design for a photographer portfolio with a modern approach",
   },
   {
-    id: 2,
+    id: 22,
     img: "/Template_Thumbnails/template-2-example-long.jpg",
     title: "Personal Portfolio Landing Page Website",
     type: "demo",
@@ -16,7 +16,7 @@ export const templates = [
       "Please meet with Snap Master landing page concept, Snap Master is an exploration design for a photographer portfolio with a modern approach",
   },
   {
-    id: 3,
+    id: 33,
     img: "/Template_Thumbnails/template-3-example-long.png",
     title: "Personal Portfolio Landing Page Website",
     type: "demo",
@@ -24,7 +24,7 @@ export const templates = [
       "Please meet with Snap Master landing page concept, Snap Master is an exploration design for a photographer portfolio with a modern approach",
   },
   {
-    id: 4,
+    id: 44,
     img: "/Template_Thumbnails/template-4-example-long.png",
     type: "demo",
     title: "Personal Portfolio Landing Page Website",
@@ -35,7 +35,7 @@ export const templates = [
     id: 1,
     img: "/Template_Thumbnails/t1.png",
     title: "",
-    type: "Social-Media",
+    type: "Portfolio",
     description: "",
   },
   {
@@ -49,7 +49,7 @@ export const templates = [
     id: 3,
     img: "/Template_Thumbnails/t3.png",
     title: "",
-    type: "Portfolio",
+    type: "E-Commerce",
     description: "",
   },
   {

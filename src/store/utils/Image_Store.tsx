@@ -18,6 +18,7 @@ interface Image_Component {
 interface Image_Store {
   Image_Components: Image_Component[];
   Add_Image_Component: (property: Image_Component) => void;
+  Update_Image_Components: (updatedComponents: Image_Component[]) => void;
 
   Set_Id: (Id: string) => void;
   Set_Img: (Id: string, Img: string) => void;
@@ -41,10 +42,19 @@ interface Image_Store {
 
 export const use_Image_Store = create<Image_Store>((set) => ({
   Image_Components: [],
-
   Add_Image_Component: (property) => {
     set((state) => ({
       Image_Components: [...state.Image_Components, property],
+    }));
+  },
+  Update_Image_Components: (updatedComponents: Image_Component[]) => {
+    set((state) => ({
+      Image_Components: state.Image_Components.map((component) => {
+        const updatedComponent = updatedComponents.find(
+          (updated) => updated.Id === component.Id
+        );
+        return updatedComponent ? updatedComponent : component;
+      }),
     }));
   },
 

@@ -40,6 +40,7 @@ interface Btn_Component {
 interface Btn_Store {
   Btn_Components: Btn_Component[];
   Add_Btn_Component: (property: Btn_Component) => void;
+  Update_Btn_Components: (updatedComponents: Btn_Component[]) => void;
 
   Set_Id: (Id: string) => void;
   Set_Content: (Id: string, Content: string) => void;
@@ -85,6 +86,16 @@ export const use_Btn_Store = create<Btn_Store>((set) => ({
   Add_Btn_Component: (property) => {
     set((state) => ({
       Btn_Components: [...state.Btn_Components, property],
+    }));
+  },
+  Update_Btn_Components: (updatedComponents: Btn_Component[]) => {
+    set((state) => ({
+      Btn_Components: state.Btn_Components.map((component) => {
+        const updatedComponent = updatedComponents.find(
+          (updated) => updated.Id === component.Id
+        );
+        return updatedComponent ? updatedComponent : component;
+      }),
     }));
   },
 

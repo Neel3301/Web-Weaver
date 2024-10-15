@@ -31,19 +31,60 @@ import Dashboard_C_Link_Hover from "./Dashboard_C_Link_Hover";
 
 import use_Toolbox_Store from "@/store/studio/Toolbox_Store";
 import { use_Dashboard_Store } from "@/store/studio/Dashboard_Store";
+import { UserButton } from "@clerk/nextjs";
+import { useSearchParams } from "next/navigation";
+import { ReactNode, useEffect, useMemo } from "react";
 
 const Dashboard_C_Sidebar = () => {
   // Using Toolbox Store For Handling Sidebar
-  const [Dashboard_Sidebar_Is_Open, Dashboard_Sidebar_Toggle] =
-    use_Toolbox_Store((s) => [
-      s.Dashboard_Sidebar_Is_Open,
-      s.Dashboard_Sidebar_Toggle,
-    ]);
+  const Dashboard_Sidebar_Is_Open = use_Toolbox_Store(
+    (s) => s.Dashboard_Sidebar_Is_Open
+  );
+  const Dashboard_Sidebar_Toggle = use_Toolbox_Store(
+    (s) => s.Dashboard_Sidebar_Toggle
+  );
 
   // Handling Sidebar Toggle
   const handleToggle = () => {
     Dashboard_Sidebar_Toggle();
   };
+
+  // Handling Dashboard State
+  const searchParams = useSearchParams();
+  const Set_ActiveMenu = use_Dashboard_Store((s) => s.Set_ActiveMenu);
+
+  const searchQuery = searchParams.get("navigateTo") || "Dashboard";
+
+  useEffect(() => {
+    Set_ActiveMenu(searchQuery);
+  }, [searchQuery, Set_ActiveMenu]);
+
+  // Navigation links
+  const navLinks = useMemo(
+    () => [
+      { icon: HomeIcon, text: "Dashboard", href: "?navigateTo=Dashboard" },
+      {
+        icon: Hexagon,
+        text: "Your-Template",
+        href: "?navigateTo=Your-Template",
+      },
+      {
+        icon: ShoppingCartIcon,
+        text: "E-Commerce",
+        href: "?navigateTo=E-Commerce",
+      },
+      { icon: HeartIcon, text: "Health-Care", href: "?navigateTo=Health-Care" },
+      { icon: Leaf, text: "Social-Media", href: "?navigateTo=Social-Media" },
+      { icon: Gem, text: "Portfolio", href: "?navigateTo=Portfolio" },
+      { icon: Plane, text: "Travelling", href: "?navigateTo=Travelling" },
+      { icon: Dumbbell, text: "Gym", href: "?navigateTo=Gym" },
+      { icon: Camera, text: "Photography", href: "?navigateTo=Photography" },
+      { icon: Pickaxe, text: "Construction", href: "?navigateTo=Construction" },
+      { icon: Layers3, text: "Service", href: "?navigateTo=Service" },
+      { icon: BookA, text: "Education", href: "?navigateTo=Education" },
+    ],
+    []
+  );
 
   return (
     <div
@@ -64,7 +105,7 @@ const Dashboard_C_Sidebar = () => {
           className={`flex h-[80px] items-center justify-between px-4 pr-0 ${Dashboard_Sidebar_Is_Open && "justify-center !p-0"}`}
         >
           <Link
-            href={`http://localhost:3000/dashboard/${""}`}
+            href={``}
             className={`${Dashboard_Sidebar_Is_Open && "w-full"}`}
           >
             <div
@@ -92,130 +133,55 @@ const Dashboard_C_Sidebar = () => {
         {/* Scroll  */}
         <div className="h-[calc(100vh-80px-60px)] overflow-y-scroll">
           {/* Navigate  */}
-          <div
-            className={`border-b-[1px] border-neutral-700 p-6 pt-0 ${Dashboard_Sidebar_Is_Open && "flex items-center justify-center !p-0"}`}
-          >
-            <Sidebar_Section_Title
-              title="Navigate"
-              Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-            />
-            <div className="my-[12px] flex flex-col gap-[24px]">
+
+          <SidebarSection title="Navigate" isOpen={Dashboard_Sidebar_Is_Open}>
+            {navLinks.map(({ icon, text, href }) => (
               <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={HomeIcon}
-                text="Dashboard"
+                key={text}
+                icon={icon}
+                text={text}
+                href={href}
+                isOpen={Dashboard_Sidebar_Is_Open}
               />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Hexagon}
-                text="Your-Template"
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={ShoppingCartIcon}
-                text="E-Commerce"
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={HeartIcon}
-                text="Health-Care"
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Leaf}
-                text="Social-Media"
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Gem}
-                text="Portfolio"
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Plane}
-                text="Travelling"
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Dumbbell}
-                text="Gym"
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Camera}
-                text="Photography"
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Pickaxe}
-                text="Construction"
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Layers3}
-                text="Service"
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={BookA}
-                text="Education"
-              />
-            </div>
-          </div>
+            ))}
+          </SidebarSection>
 
           {/* Help  */}
-          <div
-            className={`border-b-[1px] border-neutral-700 px-6 py-4 ${Dashboard_Sidebar_Is_Open && "flex items-center justify-center !p-0"}`}
-          >
-            <Sidebar_Section_Title
-              title="Help"
-              Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-            />
-            <div className="my-[12px] flex flex-col gap-[24px]">
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={FileTerminal}
-                text="Documentation"
-                href=""
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={BotMessageSquare}
-                text="Support"
-                href=""
-              />
-            </div>
-          </div>
 
-          {/* Social Links Visible at 1020px [lg] */}
-          <div
-            className={`px-6 py-4 ${Dashboard_Sidebar_Is_Open && "flex items-center justify-center !p-0"}`}
-          >
-            <Sidebar_Section_Title
-              title="Social Links"
-              Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
+          <SidebarSection title="Help" isOpen={Dashboard_Sidebar_Is_Open}>
+            <My_Link
+              icon={FileTerminal}
+              text="Documentation"
+              isOpen={Dashboard_Sidebar_Is_Open}
             />
-            <div className="my-[12px] flex flex-col gap-[24px]">
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Twitter}
-                text="Twitter"
-                href=""
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Linkedin}
-                text="Linkedin"
-                href=""
-              />
-              <My_Link
-                Dashboard_Sidebar_Is_Open={Dashboard_Sidebar_Is_Open}
-                icon={Github}
-                text="Github"
-                href=""
-              />
-            </div>
-          </div>
+            <My_Link
+              icon={BotMessageSquare}
+              text="Support"
+              isOpen={Dashboard_Sidebar_Is_Open}
+            />
+          </SidebarSection>
+
+          <SidebarSection
+            title="Social Links"
+            isOpen={Dashboard_Sidebar_Is_Open}
+          >
+            <My_Link
+              icon={Twitter}
+              text="Twitter"
+              isOpen={Dashboard_Sidebar_Is_Open}
+            />
+            <My_Link
+              icon={Linkedin}
+              text="Linkedin"
+              isOpen={Dashboard_Sidebar_Is_Open}
+            />
+            <My_Link
+              icon={Github}
+              text="Github"
+              isOpen={Dashboard_Sidebar_Is_Open}
+            />
+          </SidebarSection>
+
           {/* Hire Professional */}
         </div>
       </div>
@@ -225,7 +191,8 @@ const Dashboard_C_Sidebar = () => {
         className={`flex h-[60px] items-center justify-start ${Dashboard_Sidebar_Is_Open && "justify-center"} gap-[18px] border-t-[1px] border-neutral-700 px-6`}
       >
         {/* <UserButton /> */}
-        <Settings size={20} />
+        {/* <Settings size={20} /> */}
+        <UserButton />
         <Link
           href={""}
           className={`text-[16px] font-semibold text-neutral-300 ${Dashboard_Sidebar_Is_Open && "hidden"}`}
@@ -237,57 +204,52 @@ const Dashboard_C_Sidebar = () => {
   );
 };
 
-const Sidebar_Section_Title = ({
+// Sidebar Section Title
+const SidebarSection = ({
   title,
-  Dashboard_Sidebar_Is_Open,
+  isOpen,
+  children,
 }: {
   title: string;
-  Dashboard_Sidebar_Is_Open?: boolean;
-}) => {
-  return (
-    <p
-      className={`text-[15px] font-semibold text-neutral-400 ${Dashboard_Sidebar_Is_Open && "hidden"}`}
-    >
-      {title}
-    </p>
-  );
-};
+  isOpen: boolean;
+  children: ReactNode;
+}) => (
+  <div
+    className={`border-b border-neutral-700 p-6 ${isOpen && "items-center"}`}
+  >
+    {!isOpen && (
+      <p className="text-[15px] font-semibold text-neutral-400">{title}</p>
+    )}
+    <div className={`my-[12px] flex flex-col gap-[24px]`}>{children}</div>
+  </div>
+);
 
-const My_Link = ({
-  text,
-  icon: Icon,
-  Dashboard_Sidebar_Is_Open,
-  href,
-}: {
-  text: string;
-  icon: LucideIcon;
-  Dashboard_Sidebar_Is_Open?: boolean;
-  href?: string;
-}) => {
-  const Element = href ? Link : "p";
-
-  // Import From Dashboard Store
+// Link Component
+const My_Link = ({ icon: Icon, text, href = "#", isOpen }: any) => {
   const ActiveMenu = use_Dashboard_Store((s) => s.ActiveMenu);
   const Set_ActiveMenu = use_Dashboard_Store((s) => s.Set_ActiveMenu);
   const Set_SearchQuery = use_Dashboard_Store((s) => s.Set_SearchQuery);
 
+  const handleClick = () => {
+    Set_ActiveMenu(text);
+    Set_SearchQuery("");
+  };
+
   return (
-    <div className={`group flex items-center justify-start gap-[18px]`}>
-      <div className="cursor-pointer">
-        <Icon
-          className={`group-hover:text-sky-400 ${ActiveMenu === text && "text-sky-500"}`}
-        />
-      </div>
-      <Link
-        href={href || ""}
-        onClick={() => {
-          Set_ActiveMenu(text);
-          Set_SearchQuery("");
-        }}
-        className={`text-[16px] ${Dashboard_Sidebar_Is_Open && "hidden"} ${ActiveMenu === text && "text-sky-500"} group-hover:text-sky-400`}
-      >
-        <Dashboard_C_Link_Hover content={text} />
-      </Link>
+    <div className="group flex cursor-pointer items-center gap-[18px]">
+      <Icon
+        onClick={handleClick}
+        className={`group-hover:text-sky-400 ${ActiveMenu === text ? "text-sky-500" : ""}`}
+      />
+      {!isOpen && (
+        <Link
+          href={href}
+          onClick={handleClick}
+          className={`text-[16px] group-hover:text-sky-400 ${ActiveMenu === text ? "text-sky-500" : ""}`}
+        >
+          <Dashboard_C_Link_Hover content={text} />
+        </Link>
+      )}
     </div>
   );
 };

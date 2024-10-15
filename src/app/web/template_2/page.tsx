@@ -1,9 +1,18 @@
 "use client";
+import Loading from "@/app/loading";
+import Btn from "@/components/utils/Btn";
 import Div from "@/components/utils/Div";
+import Image from "@/components/utils/Image";
 import Text from "@/components/utils/Text";
 import { titillium_Web } from "@/constants/studio/font_list";
+import useTemplateLogic from "@/hooks/web/Use_Template_Logic";
 
 const Template_2 = () => {
+  const isLoading = useTemplateLogic();
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <Div
       cId="T2-landing"
@@ -15,10 +24,11 @@ const Template_2 = () => {
       <Text
         cId="t2"
         fontSize={52}
+        textAlignment="center"
         fontStyle={titillium_Web.className}
         fontWeight={600}
       >
-        Template - 2
+        Template Under Construction
       </Text>
     </Div>
   );

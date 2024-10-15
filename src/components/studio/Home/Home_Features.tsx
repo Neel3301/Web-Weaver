@@ -26,7 +26,7 @@ const Home_Features = () => {
           helps you create stunning websites effortlessly.`}
         </p>
         <div className="flex items-center justify-center gap-2 sm:justify-start">
-          <Link href={"/dashboard/1"}>
+          <Link href={"/v2"} prefetch>
             <Home_C_Gradient_Btn text="Get Started" />
           </Link>
           <Link href={"/dashboard/1"}>

@@ -7,6 +7,7 @@ import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import * as LucidIcons from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -53,7 +54,7 @@ interface Btn_Props {
 
 const Btn = ({
   cId,
-  children = "text",
+  children = "btn",
   tag = "span",
 
   fontStyle = poppins.className,
@@ -172,12 +173,13 @@ const Btn = ({
   };
 
   // Handle Input
-  const handleInput = (e: any) => {
+  const handleInput = (e: React.FormEvent<HTMLElement>) => {
     Set_Content(cId, e.currentTarget.textContent || "");
   };
 
-  // Setting Environment
-  let env = "development";
+  // Setting Env
+  const searchParams = useSearchParams();
+  const env = searchParams.get("editor") ? "development" : "production";
   // ...
 
   // Setting Tag
@@ -263,7 +265,7 @@ const Btn = ({
         Set_Line_Height(Selected_Id!, lineHeight);
       } else if (type === "UPDATE_BTN_COMPONENT_LETTER_SPACING") {
         Set_Letter_Spacing(Selected_Id!, letterSpacing);
-      } else if (type === "UPDATE_BTN_COMPONENT_LINK") {
+      } else if (type === "UPDATE_BTN_COMPONENT_Link") {
         Set_Link(Selected_Id!, link);
       } else if (type === "UPDATE_BTN_COMPONENT_BG_COLOR") {
         Set_Bg_Color(Selected_Id!, bgColor);
@@ -303,7 +305,7 @@ const Btn = ({
 
   return (
     <div
-      onClick={handleClick}
+      onClick={env === "development" ? handleClick : () => {}}
       className={`flex h-fit w-fit items-center justify-center gap-[12px] transition duration-500 ${classname}`}
       style={{
         backgroundColor: `${isHover ? My_Component?.Hover_Bg_Color : My_Component?.Bg_Color}`,
@@ -318,13 +320,13 @@ const Btn = ({
       {My_Component?.Content != "" && (
         <Element
           id={cId}
-          onBlur={handleInput}
-          contentEditable={true}
+          onBlur={env === "development" ? handleInput : () => {}}
+          contentEditable={env === "development" ? true : false}
           spellCheck={false}
           onMouseOver={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
           className={`${My_Component?.Font_Style} flex h-fit w-fit items-center justify-center gap-[12px] ${env == "development" ? "cursor-text" : "cursor-pointer"} hover:border-[${My_Component?.Hover_Border_Color}] hover:bg-[${My_Component?.Hover_Bg_Color}] hover:text-[${My_Component?.Hover_Text_Color}]`}
-          href={link || ""}
+          href={My_Component?.Link || ""}
           style={{
             fontSize: `${My_Component?.Font_Size}px`,
             fontWeight: `${My_Component?.Font_Weight}`,
@@ -343,3 +345,10 @@ const Btn = ({
 };
 
 export default Btn;
+
+{
+  /* {My_Component?.Content} */
+}
+{
+  /* </Element> */
+}

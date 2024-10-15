@@ -26,6 +26,7 @@ import { Button } from "../ui/button";
 import Icon_List from "@/constants/studio/icon_list";
 import { useEffect, useState } from "react";
 import { sendMessageToIframe } from "@/hooks/studio/Send_Msg_To_Iframe";
+import { Value } from "@radix-ui/react-select";
 
 const Btn_Toolbox = () => {
   // Import From Toolbox store
@@ -252,7 +253,10 @@ const Btn_Toolbox = () => {
 
   // link
   const Handle_Link = (e: any) => {
-    Set_Link(e.target.value);
+    const value = e.target.value;
+    console.log(value);
+
+    Set_Link(value);
     sendMessageToIframe({
       type: "UPDATE_BTN_COMPONENT_Link",
       id: Selected_Id,
@@ -412,6 +416,7 @@ const Btn_Toolbox = () => {
               <LucidIcons.Link2 size={24} />
               <Input
                 className="border-none"
+                value={Link}
                 placeholder="Past Your Link Here"
                 onChange={Handle_Link}
               />

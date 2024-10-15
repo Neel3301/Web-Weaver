@@ -25,6 +25,7 @@ interface Icon_Component {
 interface Icon_Store {
   Icon_Components: Icon_Component[];
   Add_Icon_Component: (property: Icon_Component) => void;
+  Update_Icon_Components: (updatedComponents: Icon_Component[]) => void;
 
   Set_Id: (Id: string) => void;
   Set_Icon: (Id: string, Icon: string) => void;
@@ -58,6 +59,16 @@ export const use_Icon_Store = create<Icon_Store>((set) => ({
   Add_Icon_Component: (property) => {
     set((state) => ({
       Icon_Components: [...state.Icon_Components, property],
+    }));
+  },
+  Update_Icon_Components: (updatedComponents: Icon_Component[]) => {
+    set((state) => ({
+      Icon_Components: state.Icon_Components.map((component) => {
+        const updatedComponent = updatedComponents.find(
+          (updated) => updated.Id === component.Id
+        );
+        return updatedComponent ? updatedComponent : component;
+      }),
     }));
   },
 

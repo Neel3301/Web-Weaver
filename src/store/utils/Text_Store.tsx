@@ -24,6 +24,7 @@ interface Text_Component {
 interface Text_Store {
   Text_Components: Text_Component[];
   Add_Text_Component: (property: Text_Component) => void;
+  Update_Text_Components: (updatedComponents: Text_Component[]) => void;
 
   Set_Id: (Id: string) => void;
   Set_Content: (Id: string, Content: string) => void;
@@ -53,6 +54,16 @@ export const use_Text_Store = create<Text_Store>((set) => ({
   Add_Text_Component: (property) => {
     set((state) => ({
       Text_Components: [...state.Text_Components, property],
+    }));
+  },
+  Update_Text_Components: (updatedComponents: Text_Component[]) => {
+    set((state) => ({
+      Text_Components: state.Text_Components.map((component) => {
+        const updatedComponent = updatedComponents.find(
+          (updated) => updated.Id === component.Id
+        );
+        return updatedComponent ? updatedComponent : component;
+      }),
     }));
   },
 
