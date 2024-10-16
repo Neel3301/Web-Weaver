@@ -17,7 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <div className={`${inter.className} bg-black`}>
-      <Suspense fallback={<Loading />}>{children}</Suspense>
+      <Suspense
+        fallback={
+          <Loading msg="Just a moment while we gather everything you need!" />
+        }
+      >
+        {children}
+      </Suspense>
     </div>
   );
 }

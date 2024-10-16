@@ -11,7 +11,9 @@ const Template_1 = () => {
   const isLoading = useTemplateLogic();
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <Loading msg="Thanks for waiting! We're loading up something great!" />
+    );
   }
 
   return (
@@ -739,7 +741,7 @@ const Template_1 = () => {
                   cId="T1-customer-testimonials-card-three-client-designation"
                   fontSize={12}
                 >
-                  McDonald's
+                  McDonalds
                 </Text>
               </Div>
             </Div>

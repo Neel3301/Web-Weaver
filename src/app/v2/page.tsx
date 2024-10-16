@@ -4,6 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Loading from "../loading";
 
 const V2 = () => {
   const { user } = useUser();
@@ -48,13 +49,7 @@ const V2 = () => {
     }
   }, [user]);
 
-  return (
-    <div className="flex h-screen w-screen items-center justify-center bg-black">
-      <div className="animate-spin">
-        <Loader size={48} color="#ffffff" />
-      </div>
-    </div>
-  );
+  return <Loading msg="Just a moment! Setting up your dashboard..." />;
 };
 
 export default V2;

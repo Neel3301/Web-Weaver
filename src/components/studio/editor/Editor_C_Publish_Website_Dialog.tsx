@@ -65,10 +65,15 @@ const Editor_C_Publish_Website_Dialog = () => {
 
   const templateId = path.slice(8);
 
+  const [error, setError] = useState("");
+  const [loadingMsg, setLoadingMsg] = useState(false);
+
   const handlePublish = async (e: any) => {
     e.preventDefault();
     try {
       setLoading(true);
+      setLoadingMsg(true);
+      setError("");
       const res = await fetch("/api/website/", {
         method: "POST",
         headers: {
@@ -90,12 +95,18 @@ const Editor_C_Publish_Website_Dialog = () => {
 
       if (data.message === "Website Created") {
         router.push(`/web/${websiteName}`);
+      } else if (data.message === "Website already exists") {
+        setError("The name you entered is already in use. Please try another.");
+        setLoadingMsg(false);
       }
     } catch (err: any) {
-      console.log("Error: Frontend :  " + err.message);
       router.push(`/web/${websiteName}`);
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
+      if (!error) {
+        setLoadingMsg(true);
+      }
     }
   };
 
@@ -130,6 +141,15 @@ const Editor_C_Publish_Website_Dialog = () => {
                 className="col-span-5"
               />
             </div>
+            {error ? (
+              <h1 className="text-center text-[14px] text-red-500">{error}</h1>
+            ) : (
+              loadingMsg && (
+                <h1 className="text-center text-[14px] text-green-500">
+                  Crafting your website… almost ready!
+                </h1>
+              )
+            )}
           </div>
           <DialogFooter>
             <DialogClose asChild>

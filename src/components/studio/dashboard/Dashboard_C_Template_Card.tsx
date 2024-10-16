@@ -1,7 +1,10 @@
 "use client";
+import Loading from "@/app/loading";
+import { use_Loading_Store } from "@/store/Loading_Store";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 interface Dashboard_C_Template_Card_Props {
   img: string;
@@ -12,7 +15,7 @@ const Dashboard_C_Template_Card = ({
   id,
 }: Dashboard_C_Template_Card_Props) => {
   return (
-    <Link href={`/editor/${id}`} prefetch>
+    <Link href={`/editor/${id}`} prefetch target="_blank">
       <div className="cursor-pointer p-3">
         <div className="relative h-[200px] w-[350px]">
           <Image src={img} fill alt="t1" objectFit="cover" />

@@ -52,59 +52,61 @@ const Dashboard_S_User_Templates = () => {
           <Dashboard_C_Section_Heading heading="No Templates Found" />
         </div>
       ) : (
-        websiteData.map((x: any) => (
-          <div key={x.id}>
-            <Dashboard_C_Section_Heading
-              heading="Recently Edited Template"
-              subHeading={"Your Template"}
-            />
-            <div className="flex items-center justify-between">
-              <div className="mb-[24px] mt-[24px] flex gap-[34px]">
-                <Dashboard_C_Template_Card
-                  href={`${DOMAIN}/web/${x.website}`}
-                  img={`/Template_Thumbnails/t${x.templateId}.png`}
-                  id="a"
-                />
-                <div className="flex flex-col justify-center gap-[18px]">
-                  <h3 className="font-semibold text-neutral-400">
-                    Website Name : {x.website}
-                  </h3>
-                  <h3 className="font-semibold text-neutral-400">
-                    Website ID : {x.id}
-                  </h3>
-                  <h3 className="font-semibold text-neutral-400">
-                    Template Id : {x.templateId}
-                  </h3>
-                  <h3 className="font-semibold text-neutral-400">
-                    Created At : {x.createdAt}
-                  </h3>
-                  <h3 className="font-semibold text-neutral-400">
-                    URL :{" "}
-                    <Link
-                      className="text-sky-400"
-                      href={`${DOMAIN}/web/${x.website}`}
-                    >
-                      {DOMAIN}/web/{x.website}
-                    </Link>
-                  </h3>
+        <>
+          <Dashboard_C_Section_Heading
+            heading="Recently Edited Template"
+            subHeading={"Your Template"}
+          />
+          {websiteData.map((x: any) => (
+            <div key={x.id}>
+              <div className="flex items-center justify-between">
+                <div className="mb-[24px] mt-[24px] flex gap-[34px]">
+                  <Dashboard_C_Template_Card
+                    href={`${DOMAIN}/web/${x.website}`}
+                    img={`/Template_Thumbnails/t${x.templateId}.png`}
+                    id="a"
+                  />
+                  <div className="flex flex-col justify-center gap-[18px]">
+                    <h3 className="font-semibold text-neutral-400">
+                      Website Name : {x.website}
+                    </h3>
+                    <h3 className="font-semibold text-neutral-400">
+                      Website ID : {x.id}
+                    </h3>
+                    <h3 className="font-semibold text-neutral-400">
+                      Template Id : {x.templateId}
+                    </h3>
+                    <h3 className="font-semibold text-neutral-400">
+                      Created At : {x.createdAt}
+                    </h3>
+                    <h3 className="font-semibold text-neutral-400">
+                      URL :{" "}
+                      <Link
+                        className="text-sky-400"
+                        href={`${DOMAIN}/web/${x.website}`}
+                      >
+                        {DOMAIN}/web/{x.website}
+                      </Link>
+                    </h3>
+                  </div>
                 </div>
+                <Canvas
+                  text={`${DOMAIN}/web/${x.website}`}
+                  options={{
+                    errorCorrectionLevel: "M",
+                    margin: 3,
+                    scale: 4,
+                    width: 200,
+                    color: {
+                      dark: "#262626",
+                      light: "#FFFFFF",
+                    },
+                  }}
+                />
               </div>
-              <Canvas
-                text={`${DOMAIN}/web/${x.website}`}
-                options={{
-                  errorCorrectionLevel: "M",
-                  margin: 3,
-                  scale: 4,
-                  width: 200,
-                  color: {
-                    dark: "#262626",
-                    light: "#FFFFFF",
-                  },
-                }}
-              />
             </div>
-          </div>
-        ))
+          ))}
+        </>
       )}
     </div>
   );
