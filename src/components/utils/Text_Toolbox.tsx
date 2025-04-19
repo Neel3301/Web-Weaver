@@ -219,7 +219,6 @@ const Text_Toolbox = () => {
         <Toolbox
           heading="Select Font Size"
           handleChange={(e: any) => Handle_Size(e.target.value)}
-          // value={My_Component?.Font_Size}
           value={Font_Size}
         >
           <div className="py-[12px]">

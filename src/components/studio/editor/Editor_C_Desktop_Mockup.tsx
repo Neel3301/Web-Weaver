@@ -21,7 +21,7 @@ const Editor_C_Desktop_Mockup = () => {
           <SearchIcon size={24} />
           <Input
             className="border-none"
-            placeholder="www.glimmer.com/t1"
+            placeholder="www.Web Weaver.com/t1"
             readOnly
           />
         </div>

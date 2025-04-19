@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Dashboard_C_Section_Heading from "./Dashboard_C_Section_Heading";
 import { useQRCode } from "next-qrcode";
-import { DotSquare, Plus } from "lucide-react";
+import { DotSquare, Plus, Trash } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 

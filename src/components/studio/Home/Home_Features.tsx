@@ -22,7 +22,7 @@ const Home_Features = () => {
           Features like responsive design, no coding required and more
         </h2>
         <p className="text-center text-sm font-semibold text-gray-500 sm:text-left md:text-base lg:text-lg">
-          {`Whether you're a technical expert or a non-technical user, Glimmer
+          {`Whether you're a technical expert or a non-technical user, Web Weaver
           helps you create stunning websites effortlessly.`}
         </p>
         <div className="flex items-center justify-center gap-2 sm:justify-start">

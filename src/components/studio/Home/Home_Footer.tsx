@@ -6,7 +6,7 @@ const Home_Footer = () => {
     <footer className="flex flex-col gap-8 py-16 pb-4">
       <div className="flex flex-col items-start justify-between sm:flex-row">
         <div className="text-lg font-bold text-gray-100 md:text-2xl">
-          <Link href="/">Glimmer</Link>
+          <Link href="/">Web Weaver</Link>
         </div>
         <div className="flex w-full justify-between gap-4 text-gray-100 sm:w-[40%]">
           <div className="flex flex-col gap-4">
@@ -46,7 +46,7 @@ const Home_Footer = () => {
         </div>
       </div>
       <div className="flex items-center justify-center pt-6">
-        <p className="text-gray-100">Copyright © 2024 Glimmer</p>
+        <p className="text-gray-100">Copyright © 2024 Web Weaver</p>
       </div>
     </footer>
   );

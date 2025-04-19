@@ -131,28 +131,35 @@ const Template_1 = () => {
           <Div cId="T1-hero-text-main" padB={12}>
             <Text
               cId="T1-hero-text-one"
-              classname="!text-2xl sm:!text-3xl md:!text-4xl lg:!text-5xl !font-semibold"
+              classname="sm:text-3xl md:text-4xl lg:text-5xl"
+              fontSize={48}
+              fontWeight={600}
             >
               I create
-            </Text>{" "}
+            </Text>
+            {"   "}
             <Text
               cId="T1-hero-text-two"
               textColor="#5E3BEE"
-              classname="!text-2xl sm:!text-3xl md:!text-4xl lg:!text-5xl !font-semibold"
+              fontSize={48}
+              fontWeight={600}
+              classname=" sm:text-3xl md:text-4xl lg:text-5xl"
             >
               product design
             </Text>{" "}
             <Text
               cId="T1-hero-text-three"
-              classname="!text-2xl sm:!text-3xl md:!text-4xl lg:!text-5xl !font-semibold"
+              classname="sm:text-3xl md:text-4xl lg:text-5xl "
+              fontSize={48}
+              fontWeight={600}
             >
               and brand experience
             </Text>
           </Div>
           <Text cId="T1-hero-text-description" fontSize={16}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore,
-            necessitatibus tempore sit sint distinctio et iste quo assumenda eos
-            pariatur.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Labore,necessitatibus tempore sit sint distinctio et iste quo
+            assumenda eos pariatur.
           </Text>
         </Div>
         <Div

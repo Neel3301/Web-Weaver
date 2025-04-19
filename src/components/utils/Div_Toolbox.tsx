@@ -172,7 +172,7 @@ const Div_Toolbox = () => {
         {/* Width */}
         <Toolbox
           heading="Select Width"
-          handleChange={(e: any) => Handle_Height(e.target.value)}
+          handleChange={(e: any) => Handle_Width(e.target.value)}
           value={Width}
         >
           <div className="py-[12px]">

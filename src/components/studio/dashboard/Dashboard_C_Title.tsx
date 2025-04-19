@@ -8,7 +8,7 @@ const Dashboard_C_Title = () => {
       <div className="flex items-center justify-center gap-[12px]">
         <Webhook />
         <h1 className="relative z-20 text-center text-[24px] font-bold text-white">
-          Glimmer
+          Web Weaver
         </h1>
       </div>
       <div className="relative h-[20px] w-[150px]">
